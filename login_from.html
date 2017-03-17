@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+	<style type="text/css">
+		
+
+		.bg {
+		    /* The image used */
+		    background-image: url("img/bgV2.png");
+		    /* Full height */
+		    height: 100%; 
+
+		    /* Center and scale the image nicely */
+		   /* background-position: center;
+		    background-repeat: no-repeat;
+		    */
+		    background-size: cover;
+		}
+		p,b{
+			text-shadow: 1px 1px 1px #000000;
+		}
+		td{
+			height: 40px;
+		}
+		input{
+			height: 50px;
+		}
+	</style>
+</head>
+<body class="bg">
+	
+	<div class="row">
+		<form action="action_login.php" method="post">
+		<table border="0" style="margin-top: 50px;margin-left: auto; margin-right: auto; width: 400px;">
+	              <tbody>
+	                  <tr>
+	                      <td><label><b><h4>Username</h4></b></label></td>
+	                      <td><input class="form-control" type="text" placeholder="รหัสผู้ใช้" class="" name="username" required=""></td>
+	                  </tr>
+	                  <tr>
+	                      <td><label><b><h4>Password</h4></b></label></td>
+	                      <td><input class="form-control" type="password" placeholder="รหัสผ่าน" name="psw" required=""></td>
+	                  </tr>
+	                  <tr>
+	                      <td></td><td align="center"><a class="btn btn-primary" href="from_register.php" style="font-size: 16px; margin-right: 5px;">สมัครสมาชิก</a><button class="btn btn-success"  type="submit" style="font-size: 16px;">เข้าสู่ระบบ</button></td>
+	                  </tr>
+	   		
+	              </tbody>
+	          </table>
+	          </form>
+	</div>
+</body>
+</html>
