@@ -15,9 +15,11 @@
 			$sql_insert .="  VALUES ('{$_POST['email']}','{$_POST['sudent_id']}', '{$_POST['fname']}', '{$_POST['lname']}', '{$_POST['class']}', '{$_POST['sec']}', '{$_POST['gender']}', '{$_POST['user_name']}', '{$_POST['password']}', '{$_POST['telephone']}');";
 			if(mysqli_query($connect,$sql_insert)){
 				echo "สมัครสมาชิกสำเร็จ";
-
+				header('Location: login_from.html');
 			}else{
 				echo "ไม่สามารถสมัครสมาชิกได้";
+				header('Location: action_register.php');
+
 			}
 			//echo $sql_insert;
 		}
