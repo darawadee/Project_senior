@@ -13,12 +13,18 @@
 	.myinputfile{
 		width: 150px;
 	}
+	.item{
+		background-color: #83a2d3;
+		height: 200px;
+		padding: 20px;
+	}
 </style>
 </head>
 <body>
 
 <div class="row">
 	<div class="col-md-12"  style="height: 400px;overflow: scroll;">
+		
 		<table class="table">
 
 			<tr>
@@ -35,6 +41,7 @@
 				if($res = mysqli_query($connect, $select_item)){
 					
 					while ($row = mysqli_fetch_assoc($res)) {
+						 
 						echo "<tr id='{$row['item_id']}'>";
 						echo "<td>{$row['item_id']}</td>";
 						echo "<td>{$row['item_name']}</td>";
@@ -48,31 +55,15 @@
 						echo"</td>";
 						echo "</tr>";
 
-						echo "<tr id='edit{$row['item_id']}' style='display:none'>";
-						echo "<form id='form{$row['item_id']}' enctype=multipart/form-data>";
-						echo "<td> <input class='myinput' value='{$row['item_id']}'></input> </td>";
-						echo "<td> <input class='myinput' value='{$row['item_name']}'></input> </td>";
-						echo "<td> <input class='' type='file' ></input> </td>";
-						echo "<td> <input class='myinput' value='{$row['item_all']}'></input> </td>";
-						echo "<td> <input class='myinput' value='{$row['item_total']}'></input> </td>";
-						echo "<td> <select>";
-						foreach ($config as $key => $value) {
-				       	 	echo "   <option value="."{$key} >".$value."</option>";
-					   	}
-						echo"</select></td>";
-						echo "<td>";
-						echo "<a href='#' class='save-btn btn btn-success' p-code='{$row['item_id']}'><span class='glyphicon glyphicon-floppy-save' aria-hidden='true'></span></a>";
-						echo "<a href='#' class='remove-btn btn btn-danger' p-code='{$row['item_id']}'><span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span></a>";
-						echo "</td>";
-
 						
-						echo "</form></tr>";	
+						//echo "</form>";
 					}	
-					
+					//echo "</form>"	;
 				}
 
 			?>
 		</table>
+		</form>
 
 	</div>
 	<a href="sport_equipment.php" class="btn btn-success">
@@ -121,6 +112,15 @@
 			//alert(p_code);
 			$("#edit"+p_code).hide();
 
+		});
+		$(".save-btn").click(function(event) {
+			var p_code = $(this).attr('p-code');
+			
+			var data = $("#form"+p_code).serializeArray();
+			//alert(p_code);
+			console.log(data);
+			
+			alert(data);
 		});
 
 		//hide edit

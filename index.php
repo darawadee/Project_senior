@@ -81,10 +81,10 @@
 				<li>
 					<a href="#" class="main_manu">รายการอุปกรณ์<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
-					<li><a href="#">กีฬาในร่ม</a></li>
-					<li><a href="#">กีฬกลางแจ้ง</a></li>
-					<li><a href="#">อื่นๆ</a></li>
-					<li><a href="#">ทั้งหมด</a></li>
+					<li><a href="#" class="item-list" item-type="1">กีฬาในร่ม</a></li>
+					<li><a href="#" class="item-list" item-type="2">กีฬกลางแจ้ง</a></li>
+					<li><a href="#" class="item-list" item-type="3">อื่นๆ</a></li>
+					<li><a href="#" class="item-list" item-type="0">ทั้งหมด</a></li>
 					</ul>
 				</li>
 				<li>
@@ -140,6 +140,21 @@
  		$("#btn-manager").click(function(event) {
  			get_manager();
  		});
+
+ 		$(".item-list").click(function(event) {
+ 			var item_type = $(this).attr('item-type');
+
+ 			$.post('show_item.php', 
+ 				{
+ 					item_type: item_type
+ 				},
+ 				 function() {
+ 				/*optional stuff to do after success */
+ 				}
+ 			).done(function(data){
+ 				$("#content").html(data);
+ 			});
+ 		});
  	});
 
 function get_manager(){
@@ -150,6 +165,7 @@ function get_manager(){
 	}).done(function(data){
 		$("#content").html(data);
 	});
+
 }
  	
  </script>
