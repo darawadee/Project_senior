@@ -20,8 +20,10 @@
  	<style type="text/css">
  		
  		#banner{
+ 			/*background-image:url("img/comsci.png");
+ 			background-size: cover;*/
  			/*background-color: blue;*/
- 			padding: 20px 10px 20px 50px;
+ 			height: 150px;			
  		}
  		#manu-L{
  			
@@ -40,17 +42,20 @@
  		}
  	</style>
  </head>
- <body>
+ <body class="containers">
  	<div class="row">
  		<div  class="col-md-12"  id="banner">
+ 			<img src="img/comsci.png" style="width: inherit;height: inherit;" >
+ 		</div>
+ 	</div>
+
+ 	
+ 		<div class="col-md-12" style="background-color: #c3b1ce;">
  			
- 			<img src="img/logobsru.png" style="width: 100px; height: 150px;">
- 			<div >
- 				<p><b>ระบบบริหารจัดการอุปกรณ์กีฬาโรงเรียนสาธิตมหาวิทยาลัยราชฏัชบ้านสมเด็จเจ้าพระยา</b><?php  ?></p>
- 			</div>
- 			<div style="float: right;">
- 				<p><b>ชื่อผู้ใช้</b><?php echo $_SESSION["data_user"]["fname"]." ".$_SESSION["data_user"]["lname"];?></p>
- 				<p><b>สถานะผู้ใช้</b>
+ 			<div style="float: right; padding-right: 20px;" >
+ 				<b>ชื่อผู้ใช้ </b><?php echo $_SESSION["data_user"]["fname"]." ".$_SESSION["data_user"]["lname"];?>
+ 				<b>สถานะผู้ใช้</b>
+
  				<?php 
  					if($_SESSION['data_user']["user_type"] == "3"){
  						echo "Admin";
@@ -61,17 +66,16 @@
  					}
 
  				 ?>
- 				</p>
-
+ 				<a href="action_logout.php" type="button" class="btn btn-default">Logout</a>
+ 			
  			</div>
  			
  			
- 			
  		</div>
- 	</div>
+ 	
  	<div class="row" >
 
- 		<div class="col-md-3" id="manu-L">
+ 		<div class="col-md-2" id="manu-L">
  			<ul class="nav nav-pills nav-stacked" style="margin-right: 5px;">
 			  	<li class="active"><a href="#">Home</a></li>
 				<li>
@@ -103,7 +107,7 @@
 				<?php }?>
 			</ul>		
  		</div>
- 		<div class="col-md-9" id="content">
+ 		<div class="col-md-10" id="content">
  			
  		</div>
  	</div>
@@ -134,16 +138,19 @@
  		///////////////////////////////////////////////////////
 
  		$("#btn-manager").click(function(event) {
- 			/* Act on the event */
- 			$.get('manager.php', function() {
- 				/*optional stuff to do after success */
-
- 			}).done(function(data){
- 				$("#content").html(data);
- 			});
+ 			get_manager();
  		});
  	});
 
+function get_manager(){
+	/* Act on the event */
+	$.get('manager.php', function() {
+		/*optional stuff to do after success */
+
+	}).done(function(data){
+		$("#content").html(data);
+	});
+}
  	
  </script>
 

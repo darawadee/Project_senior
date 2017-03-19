@@ -2,7 +2,7 @@
 
 
 <!DOCTYPE html>
-<html>
+<html style="margin-left: -10px">
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
