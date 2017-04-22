@@ -51,7 +51,7 @@
 					echo "<div class='item' align='center'>";
 					echo "<img id='{$row['item_id']}' src='img_item/{$row['item_img']}' style='height:150px;width: 150px;' > </img>";
 					
-					echo "<p id='Name-{$row['item_id']}'>{$row['item_name']} ({$row['item_total']})</p>";
+					echo "<p id='Name-{$row['item_id']}'>{$row['item_name']} (<b>{$row['item_total']}</b>)</p>";
 					echo "<a class='btn btn-info borrow' item-id='{$row['item_id']}'>ยืมอุปกรณ์</a>";
 					echo "</div>";
 
