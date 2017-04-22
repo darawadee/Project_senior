@@ -72,6 +72,31 @@
 		เพิ่มอุปกรณ์
 	</a>
 </div>
+
+
+<!-- /model -->
+<!-- Modal -->
+<div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="content-modal">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- /model -->
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -102,26 +127,19 @@
 		$(".edit-btn").click(function(event) {
 			var p_code = $(this).attr('p-code');
 			//alert(p_code);
-			$("#edit"+p_code).show();
+			$.post('edit_form_item.php', {product_id: p_code}, 
+				function() {
+				/*optional stuff to do after success */
+				}
+			).done(function(data){
+				$(".modal-body").html(data);
+				//alert(data);
+			});
+			$("#myModal_edit").modal("show");
 
 		});
 
-		//hide edit
-		$(".remove-btn").click(function(event) {
-			var p_code = $(this).attr('p-code');
-			//alert(p_code);
-			$("#edit"+p_code).hide();
-
-		});
-		$(".save-btn").click(function(event) {
-			var p_code = $(this).attr('p-code');
-			
-			var data = $("#form"+p_code).serializeArray();
-			//alert(p_code);
-			console.log(data);
-			
-			alert(data);
-		});
+		
 
 		//hide edit
 	});

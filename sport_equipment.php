@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html style="margin-left: -10px">
 <head>
@@ -13,13 +10,13 @@
   <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6"> <br />
-      <h4 align="center"> ฟอร์มเพิ่มสินค้า </h4>
+      <h4 align="center"> ฟอร์มอุปกรณ์กีฬา </h4>
       <hr />
       <form action="add_item.php" method="POST" enctype="multipart/form-data"  name="addprd" class="form-horizontal" id="addprd">
         <div class="form-group">
           <div class="col-sm-12">
-            <p> ชื่อสินค้า</p>
-            <input type="text"  name="p_name" class="form-control" required placeholder="ชื่อสินค้า" />
+            <p> ชื่ออุปกรณ์</p>
+            <input type="text"  name="p_name" class="form-control" required placeholder="ชื่ออุปกรณ์" />
           </div>
         </div>
         <div class="form-group">
@@ -51,7 +48,7 @@
         <div class="form-group" >
           <div class="col-sm-12" style="margin-top: 10px;">
           	         <div class="col-md-8">
-		            <p> ภาพสินค้า </p>
+		            <p> ภาพอุปกรณ์ </p>
 		            <input type="file" name="p_img" class="form-control" required />
 	          </div>
 	          <div class="col-md-4">
@@ -64,7 +61,7 @@
         </div>
         <div class="form-group">
 	          <div class="col-md-12" style="padding-left: 30px;">
-	            <button type="submit" class="btn btn-primary" > + เพิ่มสินค้า </button>
+	            <button type="submit" class="btn btn-primary" > + เพิ่มอุปกรณ์ </button>
 	          </div>
 	 </div>
       </form>

@@ -45,12 +45,14 @@
  <body class="containers">
  	<div class="row">
  		<div  class="col-md-12"  id="banner">
- 			<img src="img/comsci.png" style="width: inherit;height: inherit;" >
+ 			<img src="img/comsci1.png" style="width:inherit; height:inherit;" >
  		</div>
  	</div>
 
- 	
- 		<div class="col-md-12" style="background-color: #c3b1ce;">
+ <?php 
+ 
+ ?>
+ 		<div class="col-md-12" style="background-color: #c8bece;">
  			
  			<div style="float: right; padding-right: 20px;" >
  				<b>ชื่อผู้ใช้ </b><?php echo $_SESSION["data_user"]["fname"]." ".$_SESSION["data_user"]["lname"];?>
@@ -60,13 +62,14 @@
  					if($_SESSION['data_user']["user_type"] == "3"){
  						echo "Admin";
  					}elseif($_SESSION['data_user']["user_type"] == "2"){
- 						echo "teacher";
+ 						echo "Teacher";
  					}else{
- 						echo "student";
+ 						echo "Student";
  					}
 
  				 ?>
- 				<a href="action_logout.php" type="button" class="btn btn-default">Logout</a>
+ 				 <button class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> </span>(<b id="count-item">0</b>) </button>
+ 				<a href="action_logout.php" type="button" class="btn btn-default">ออกจากระบบ</a>
  			
  			</div>
  			
@@ -75,9 +78,22 @@
  	
  	<div class="row" >
 
- 		<div class="col-md-2" id="manu-L">
- 			<ul class="nav nav-pills nav-stacked" style="margin-right: 5px;">
+ 		<div class="col-md-3" id="manu-L">
+ 			<ul class="nav nav-pills nav-stacked" style="margin-right: 1px;">
 			  	<li class="active"><a href="#">Home</a></li>
+			  	<?php if($_SESSION['data_user']["user_type"] == "3"){?>
+				<!-- for admin -->
+			  	<li>
+					<a href="#" class="main_manu">ผู้ดูแลระบบ<i class="fa fa-chevron-down pull-right"></i></a>
+					<ul class="nav nav-show">
+					<li><a id="btn-manager" href="#">จัดการอุปกรณ์กีฬา</a></li>
+					<li><a id="btn-usermanager">จัดการข้อมูลสมาชิก</a></li>
+					<li><a href="#">อัพเดทสถานะยืม/คืนอุปกรณ์</a></li>
+					<li><a href="#">ทั้งหมด</a></li>
+					</ul>
+				</li>
+				<!-- for admin -->
+				<?php }?>
 				<li>
 					<a href="#" class="main_manu">รายการอุปกรณ์<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
@@ -88,28 +104,23 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#">ยื่นคำร้องขออุปกรณ์กีฬา<i class="fa fa-chevron-down pull-right"></i></a>
+					<a href="#" class="main_manu">ตารางเรียน<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
 					</ul>
 				</li>
-				<?php if($_SESSION['data_user']["user_type"] == "3"){?>
-				<!-- for admin -->
 				<li>
-					<a href="#" class="main_manu">ผู้ดูแลระบบ<i class="fa fa-chevron-down pull-right"></i></a>
+					<a href="#" class="main_manu">ยื่นคำร้องขออุปกรณ์กีฬา<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
-					<li><a id="btn-manager" href="#">จัดการอุปกรณ์กีฬา</a></li>
-					<li><a href="#">จัดการข้อสมาชิก</a></li>
-					<li><a href="#">อัพเดทสถานะยืม/คืนอุปกรณ์</a></li>
-					<li><a href="#">ทั้งหมด</a></li>
 					</ul>
 				</li>
-				<!-- for admin -->
-				<?php }?>
 			</ul>		
  		</div>
- 		<div class="col-md-10" id="content">
+ 		<div class="col-md-9" id="content" style="max-height: 600px;overflow: scroll;">
  			
  		</div>
+ 		<form>
+			<input type="hidden" name="cart">
+		</form>
  	</div>
  </body>
  <script type="text/javascript" src="lib/js/bootstrap.js"></script>
@@ -141,6 +152,11 @@
  			get_manager();
  		});
 
+ 		$("#btn-usermanager").click(function(event) {
+ 			get_usermanager();
+ 			//alert(444);
+ 		});
+
  		$(".item-list").click(function(event) {
  			var item_type = $(this).attr('item-type');
 
@@ -166,6 +182,14 @@ function get_manager(){
 		$("#content").html(data);
 	});
 
+}
+
+function get_usermanager(){
+	$.get('manager_user.php', function() {
+		/*optional stuff to do after success */
+	}).done(function(data){
+		$("#content").html(data);
+	});
 }
  	
  </script>
