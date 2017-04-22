@@ -47,12 +47,17 @@
 				echo "<h2>{$config[$value]}</h2><hr>";
 				echo "<div class='row'>";
 				while ($row = mysqli_fetch_assoc($res)) {
+					if($row['item_total'] * 1 <= 0){
+					    $disabled = "disabled";
+					}else{
+					     $disabled = "";
+					}
 					echo "<div class='col-md-3 '>";
 					echo "<div class='item' align='center'>";
-					echo "<img id='{$row['item_id']}' src='img_item/{$row['item_img']}' style='height:150px;width: 150px;' > </img>";
+					echo "<img id='{$row['item_id']}'  src='img_item/{$row['item_img']}' style='height:150px;width: 150px;' > </img>";
 					
 					echo "<p id='Name-{$row['item_id']}'>{$row['item_name']} (<b>{$row['item_total']}</b>)</p>";
-					echo "<a class='btn btn-info borrow' item-id='{$row['item_id']}'>ยืมอุปกรณ์</a>";
+					echo "<button class='btn btn-info borrow' {$disabled} item-id='{$row['item_id']}'>ยืมอุปกรณ์</button>";
 					echo "</div>";
 
 					echo "</div>";
@@ -84,13 +89,14 @@
         			<img id="modal-img" style="width:100%;height: 100%;" />
         		</div>
         		<div class="col-md-9">
-        		     <form action="#">
-        			<p id="modal-name">name</p>
-        			<p style="color: red">**ไม่ควรยืมอุปกรณ์เกิน <b id="alert">90</b> ชิ้น**</p>
-        			<p>
-        			<input class="form-control" type="number" id="num-item" min="1" required="">
-        			</p>
-        			<p><button type="submit" class="btn btn-info">ok</button></p>
+        		     <form action="#" id="modal-item">
+	        			<p id="modal-name">name</p>
+	        			<p style="color: red">**ไม่ควรยืมอุปกรณ์เกิน <b id="alert">90</b> ชิ้น**</p>
+	        			<p>
+	        			<input class="form-control" type="number" id="num-item" min="1" required="">
+	        			<input type="hidden" id="item-hide-id">
+	        			</p>
+	        			<p><button type="submit" class="btn btn-info">ok</button></p>
         		     </form>
         		</div>
         	</div>
@@ -106,26 +112,32 @@
 <script type="text/javascript">
 	$('.borrow').click(function(event) {
 		var item_id = $(this).attr('item-id');
-		//$(".modal-title").html(item_id);
-		//$("#num-item").val('');
+		$("#item-hide-id").val(item_id);
+		$("#num-item").val('');
 		var url_img =  $("#"+item_id).attr('src');
 		var name_item = $('#Name-'+item_id).text();
 		$("#modal-name").text(name_item);
-		var patt = /\(\s?(\d.?)\s?\)/gm;
-		var number_patt = /\d+/g;
-		//name_item.replace(patt, "$1");
 		var total = $('#Name-'+item_id+' b').text(); 
 		$("#alert").text(total);
 		$("#num-item").attr('max', total);
-		
-		// var total_num = total.match(patt);
-		//alert(total);
 		$("#modal-img").attr('src', url_img);
 		$("#modal-borrow").modal('toggle');
 
 	});
 
-	$("form").submit(function(event) {
-		alert(555);
+	$("form#modal-item").submit(function(event) {
+		let item_id = $("#item-hide-id").val();
+		let amount = $("#num-item").val();
+		$.post('service/service_session_cart.php', {item_id: item_id,amount:amount,method:'set'}, function() {
+			
+		}).done(function(data){
+			if(data == 'true'){
+				get_count_item();
+				$("#modal-borrow").modal('toggle');
+			}else{
+				alert(data);
+			}
+		});
+		//alert($("#item-hide-id").val()+" num "+$("#num-item").val());
 	});
 </script>

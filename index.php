@@ -16,7 +16,10 @@
  <head>
  	<title></title>
  	<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
- 	<script type="text/javascript" src="lib/js/jquery-3.2.0.js"></script>
+ 	
+
+ 	<script src="lib/js/jquery-3.2.0.js"></script>
+
  	<style type="text/css">
  		
  		#banner{
@@ -68,7 +71,7 @@
  					}
 
  				 ?>
- 				 <button class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> </span>(<b id="count-item">0</b>) </button>
+ 				 <button class="btn btn-info" id="info-cart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> </span>(<b id="count-item">0</b>) </button>
  				<a href="action_logout.php" type="button" class="btn btn-default">ออกจากระบบ</a>
  			
  			</div>
@@ -118,16 +121,38 @@
  		<div class="col-md-9" id="content" style="max-height: 600px;overflow: scroll;">
  			
  		</div>
- 		<form>
-			<input type="hidden" name="cart">
-		</form>
+ 		
+ 		<!-- modal start -->
+ 		<!-- Modal -->
+		<div id="Modal-info-cart" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Modal Header</h4>
+		      </div>
+		      <div class="modal-body" id="model-show-cart">
+		        
+		      </div>
+		      <div class="modal-footer">
+		      	 <button type="button" class="btn btn-info" >ยืนยัน</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+ 		<!-- modal stop -->
+
  	</div>
  </body>
  <script type="text/javascript" src="lib/js/bootstrap.js"></script>
  <script type="text/javascript">
  	$(document).ready(function() {
  		$('.nav-show').hide();
-
+ 		get_count_item();
 		$("li:has(ul)").click(function(){
 		  if($(this).hasClass('open')) {
 		    $(this).removeClass('open').find('ul').slideUp();
@@ -159,17 +184,12 @@
 
  		$(".item-list").click(function(event) {
  			var item_type = $(this).attr('item-type');
+ 			get_item(item_type);
+ 			
+ 		});
 
- 			$.post('show_item.php', 
- 				{
- 					item_type: item_type
- 				},
- 				 function() {
- 				/*optional stuff to do after success */
- 				}
- 			).done(function(data){
- 				$("#content").html(data);
- 			});
+ 		$('#info-cart').click(function(event) {
+ 			mount_info_tomodel();
  		});
  	});
 
@@ -180,8 +200,33 @@ function get_manager(){
 
 	}).done(function(data){
 		$("#content").html(data);
+		
 	});
 
+}
+function mount_info_tomodel(){
+	$.get('service/render_table_info_item.php', function() {
+		/*optional stuff to do after success */
+	}).done(function(data){
+		$("#model-show-cart").html(data);
+		$('#Modal-info-cart').modal('toggle');
+	});
+
+
+}
+
+
+function get_item(item_type){
+	$.post('show_item.php', 
+		{
+			item_type: item_type
+		},
+		 function() {
+		/*optional stuff to do after success */
+		}
+	).done(function(data){
+		$("#content").html(data);
+	});
 }
 
 function get_usermanager(){
@@ -189,6 +234,14 @@ function get_usermanager(){
 		/*optional stuff to do after success */
 	}).done(function(data){
 		$("#content").html(data);
+	});
+}
+
+function get_count_item(){
+	$.post('service/service_session_cart.php', {method:'get'}, function() {
+			
+	}).done(function(data){
+		$("#count-item").text(data);
 	});
 }
  	
