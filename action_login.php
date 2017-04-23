@@ -9,6 +9,7 @@
 			echo "เข้าสู่ระบบสำเร็จ";
 			$data = mysqli_fetch_assoc($res);
 			$_SESSION['data_user'] =$data;
+			$_SESSION['item_cart'] = array();
 			header('Location: index.php');
 		}else{
 			echo "user password ไม่ถูกต้อง";

@@ -16,7 +16,10 @@
  <head>
  	<title></title>
  	<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
- 	<script type="text/javascript" src="lib/js/jquery-3.2.0.js"></script>
+<!--  	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"> -->
+
+
+
  	<style type="text/css">
  		
  		#banner{
@@ -52,33 +55,54 @@
  <?php 
  
  ?>
- 		<div class="col-md-12" style="background-color: #c8bece;">
- 			
- 			<div style="float: right; padding-right: 20px;" >
- 				<b>ชื่อผู้ใช้ </b><?php echo $_SESSION["data_user"]["fname"]." ".$_SESSION["data_user"]["lname"];?>
- 				<b>สถานะผู้ใช้</b>
+ 		
+ 		
+ 			<nav class="navbar navbar-default" style="margin-bottom: 0px;">
+			  <div class="container-fluid">
+			    <!-- <div class="navbar-header">
+			      <a class="navbar-brand" href="#">WebSiteName</a>
+			    </div>
+			    <ul class="nav navbar-nav">
+			      <li class="active"><a href="#">Home</a></li>
+			      <li><a href="#">Page 1</a></li>
+			      <li><a href="#">Page 2</a></li>
+			    </ul> -->
+			    <ul class="nav navbar-nav navbar-right">
+			    <li>
+			    	<a href="#">
+					    <b>ชื่อผู้ใช้ </b><?php echo $_SESSION["data_user"]["fname"]." ".$_SESSION["data_user"]["lname"];?>
+		 				<b>สถานะผู้ใช้</b>
 
- 				<?php 
- 					if($_SESSION['data_user']["user_type"] == "3"){
- 						echo "Admin";
- 					}elseif($_SESSION['data_user']["user_type"] == "2"){
- 						echo "Teacher";
- 					}else{
- 						echo "Student";
- 					}
+		 				<?php 
+		 					if($_SESSION['data_user']["user_type"] == "3"){
+		 						echo "Admin";
+		 					}elseif($_SESSION['data_user']["user_type"] == "2"){
+		 						echo "Teacher";
+		 					}else{
+		 						echo "Student";
+		 					}
 
- 				 ?>
- 				 <button class="btn btn-info"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> </span>(<b id="count-item">0</b>) </button>
- 				<a href="action_logout.php" type="button" class="btn btn-default">ออกจากระบบ</a>
+		 				 ?>
+ 				 	</a>	
+
+			    </li>
+			    <li style="margin-left: 5px; margin-right: 5px;">
+			       <button   class="btn btn btn-info navbar-btn" id="info-cart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> </span> (<b id="count-item">0</b>)</button>
+			      <!-- <button class="btn btn-info" id="info-cart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> </span>(<b id="count-item">0</b>)</button> -->
+				</li>			      
+			     <li> <a href="action_logout.php" class="btn btn-default">ออกจากระบบ</a></li>
+
+			   
+			    </ul>
+			  </div>
+			</nav>
  			
- 			</div>
  			
- 			
- 		</div>
+ 	
  	
  	<div class="row" >
 
- 		<div class="col-md-3" id="manu-L">
+ 		<div class="col-md-3" id="manu-L" style="height: 80vh ; background-color: #c8bece" >
  			<ul class="nav nav-pills nav-stacked" style="margin-right: 1px;">
 			  	<li class="active"><a href="#">Home</a></li>
 			  	<?php if($_SESSION['data_user']["user_type"] == "3"){?>
@@ -87,9 +111,9 @@
 					<a href="#" class="main_manu">ผู้ดูแลระบบ<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
 					<li><a id="btn-manager" href="#">จัดการอุปกรณ์กีฬา</a></li>
-					<li><a id="btn-usermanager">จัดการข้อมูลสมาชิก</a></li>
-					<li><a href="#">อัพเดทสถานะยืม/คืนอุปกรณ์</a></li>
-					<li><a href="#">ทั้งหมด</a></li>
+					<li><a id="btn-usermanager"  href="#">จัดการข้อมูลสมาชิก</a></li>
+					<li><a id="btn-manager_br"  href="#">อัพเดทสถานะยืม/คืนอุปกรณ์</a></li>
+					
 					</ul>
 				</li>
 				<!-- for admin -->
@@ -103,6 +127,13 @@
 					<li><a href="#" class="item-list" item-type="0">ทั้งหมด</a></li>
 					</ul>
 				</li>
+				<?php if($_SESSION['data_user']["user_type"] != "3"){?>
+				<!-- for admin -->
+				<li>
+					<a href="#" id="list_br" class="main_manu">รายการยืมคืน<i class="fa fa-chevron-down pull-right"></i></a>
+				</li>
+				<?php }?>
+
 				<li>
 					<a href="#" class="main_manu">ตารางเรียน<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
@@ -118,16 +149,43 @@
  		<div class="col-md-9" id="content" style="max-height: 600px;overflow: scroll;">
  			
  		</div>
- 		<form>
-			<input type="hidden" name="cart">
-		</form>
+ 		
+ 		<!-- modal start -->
+ 		<!-- Modal -->
+		<div id="Modal-info-cart" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">รายการอุปกรณ์ที่เลือก</h4>
+		      </div>
+		      <div class="modal-body" id="model-show-cart">
+		        
+		      </div>
+		      <div class="modal-footer">
+		      	 <button type="button" class="btn btn-info" id="conf">ยืนยัน</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+ 		<!-- modal stop -->
+
  	</div>
  </body>
+ <script src="lib/js/jquery-3.2.0.js"></script>
+ <!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> -->
  <script type="text/javascript" src="lib/js/bootstrap.js"></script>
  <script type="text/javascript">
  	$(document).ready(function() {
+ 		
+		    
+		
  		$('.nav-show').hide();
-
+ 		get_count_item();
 		$("li:has(ul)").click(function(){
 		  if($(this).hasClass('open')) {
 		    $(this).removeClass('open').find('ul').slideUp();
@@ -145,7 +203,7 @@
  			}).done(function(data){
  				$("#content").html(data);
  			});
- 		});
+ 		}); 
  		///////////////////////////////////////////////////////
 
  		$("#btn-manager").click(function(event) {
@@ -159,16 +217,46 @@
 
  		$(".item-list").click(function(event) {
  			var item_type = $(this).attr('item-type');
+ 			get_item(item_type);
+ 			
+ 		});
 
- 			$.post('show_item.php', 
- 				{
- 					item_type: item_type
- 				},
- 				 function() {
+ 		$('#info-cart').click(function(event) {
+ 			mount_info_tomodel();
+ 		});
+
+ 		$("#conf").click(function(event) {
+ 			$.post('service/save_item_br.php',function() {
  				/*optional stuff to do after success */
+ 			}).done(function(data){
+ 				if(data == 'true'){
+ 					alert("บันทึกข้อมูลเรียบร้อย");
+ 					get_count_item();
+ 					$('#Modal-info-cart').modal('toggle');
+ 				}else{
+ 					alert(data);
  				}
- 			).done(function(data){
+ 			});
+ 		});
+
+ 		//____________________
+
+ 		$("#list_br").click(function(event) {
+ 			//alert("รายการ");
+ 			$.get('service/show_list_br.php', function() {
+ 				/*optional stuff to do after success */
+ 			}).done(function(data){
  				$("#content").html(data);
+ 			});
+ 		});
+ 		//_____________________________________
+
+ 		$("#btn-manager_br").click(function(event) {
+ 			$.get('service/show_list_br.php', function() {
+ 				/*optional stuff to do after success */
+ 			}).done(function(data){
+ 				$("#content").html(data);
+
  			});
  		});
  	});
@@ -180,8 +268,33 @@ function get_manager(){
 
 	}).done(function(data){
 		$("#content").html(data);
+		
 	});
 
+}
+function mount_info_tomodel(){
+	$.get('service/render_table_info_item.php', function() {
+		/*optional stuff to do after success */
+	}).done(function(data){
+		$("#model-show-cart").html(data);
+		$('#Modal-info-cart').modal('toggle');
+	});
+
+
+}
+
+
+function get_item(item_type){
+	$.post('show_item.php', 
+		{
+			item_type: item_type
+		},
+		 function() {
+		/*optional stuff to do after success */
+		}
+	).done(function(data){
+		$("#content").html(data);
+	});
 }
 
 function get_usermanager(){
@@ -189,6 +302,14 @@ function get_usermanager(){
 		/*optional stuff to do after success */
 	}).done(function(data){
 		$("#content").html(data);
+	});
+}
+
+function get_count_item(){
+	$.post('service/service_session_cart.php', {method:'get'}, function() {
+			
+	}).done(function(data){
+		$("#count-item").text(data);
 	});
 }
  	
