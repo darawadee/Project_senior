@@ -60,7 +60,7 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#table-user').DataTable();
+			
 			$(".btn_delete_user").click(function(event) {
 				var uid = $(this).attr("uid");
 				//alert(uid);
