@@ -16,6 +16,7 @@
  <head>
  	<title></title>
  	<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+ 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/6.6.1/sweetalert2.min.css">
 <!--  	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"> -->
 
 
@@ -179,6 +180,7 @@
  <script src="lib/js/jquery-3.2.0.js"></script>
  <!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> -->
  <script type="text/javascript" src="lib/js/bootstrap.js"></script>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/sweetalert2/6.6.1/sweetalert2.min.js"></script>
  <script type="text/javascript">
  	$(document).ready(function() {
  		

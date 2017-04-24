@@ -99,8 +99,36 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.status_update').change(function(event) {
-			var element = $(this).find('option:selected'); 
-			alert(element.attr('borrow_id'));
+			var option_selected = $(this).find('option:selected'); 
+			var br_id = option_selected.attr('borrow_id');
+			var message = option_selected.text();
+				swal({
+				  title: 'คุณแน่ใจหรือไม่ ที่จะอัพเดทสถานะ เป็น '+message,
+				  text: 'กรุณาใส่ password ของท่าน เพื่อทำการยืนยัน',
+				  input: 'password',
+				  showCancelButton: true,
+				  confirmButtonText: 'Submit',
+				  //showLoaderOnConfirm: true,
+				  preConfirm: function (text) {
+				   
+				      //alert(text);
+				      if(text === ''){
+				      	swal(
+						  'Oops...',
+						  'กรุณาป้อน password',
+						  'error'
+						)
+				      }else{
+				      		$.post('service/update_status_br.php', {password: text,br_id:br_id}, function() {
+				      			/*optional stuff to do after success */
+				      		}).done(function(data){
+				      			swal(data);
+				      			
+				      		});
+				      }
+				   
+				  } 
+				})
 		});
 	});
 </script>
