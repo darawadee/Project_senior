@@ -5,22 +5,23 @@
 	<?php  
 		require 'config_DB/DB_connect.php';
 	?>
+
 </head>
 <body>
 	
-	<table class="table table-hover">
+	<table class="table table-hover" id="table-user">
 	  <tr>
-	    <th class="">รหัสนักเรียน</th>
-	    <th class="">ชื่อ</th>
-	    <th class="">นามสกุล</th>
-	    <th class="">Email</th>
-	    <th class="">User</th>
-	    <th class="">Password</th>
-	    <th class="">ชั้นปี</th>
-	    <th class="">ห้อง</th>
-	    <th class="">เพศ</th>
-	    <th class="">Telephone</th>
-	     <th class=""></th>
+	    <th >รหัสนักเรียน</th>
+	    <th >ชื่อ</th>
+	    <th >นามสกุล</th>
+	    <th >Email</th>
+	    <th >User</th>
+	    <th >Password</th>
+	    <th >ชั้นปี</th>
+	    <th >ห้อง</th>
+	    <th >เพศ</th>
+	    <th >Telephone</th>
+	     <th ></th>
 	  </tr> 
 	  <?php 
 	  	$sql="SELECT * FROM `user_acount`";
@@ -56,8 +57,10 @@
 		เพิ่มข้อมูลสมาชิก
 	</a>
 </body>
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
 			$(".btn_delete_user").click(function(event) {
 				var uid = $(this).attr("uid");
 				//alert(uid);
