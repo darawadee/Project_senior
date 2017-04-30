@@ -102,6 +102,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 			var option_selected = $(this).find('option:selected'); 
 			var br_id = option_selected.attr('borrow_id');
 			var message = option_selected.text();
+			var num_status = $(this).val();
 				swal({
 				  title: 'คุณแน่ใจหรือไม่ ที่จะอัพเดทสถานะ เป็น '+message,
 				  text: 'กรุณาใส่ password ของท่าน เพื่อทำการยืนยัน',
@@ -119,7 +120,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 						  'error'
 						)
 				      }else{
-				      		$.post('service/update_status_br.php', {password: text,br_id:br_id}, function() {
+				      		$.post('service/update_status_br.php', {password: text,br_id:br_id,num_status:num_status}, function() {
 				      			/*optional stuff to do after success */
 				      		}).done(function(data){
 				      			swal(data);
