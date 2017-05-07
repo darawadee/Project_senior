@@ -40,8 +40,8 @@
 	   		<td><?=$row['gender'] ?></td>
 	   		<td><?=$row['telephone'] ?></td>
 	   		<td>
-	   		 <a href='#'  class='edit-btn btn btn-warning'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
-			<a id= href='#' uid="<?=$row['sudent_id'] ?>" class='btn_delete_user btn btn-danger'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
+	   		 <a href='#'  class='edit-btn btn btn-warning'><span class='fa fa-cog fa-lg' aria-hidden='true'></span>
+			<a id= href='#' uid="<?=$row['sudent_id'] ?>" class='btn_delete_user btn btn-danger'><span class='fa fa-trash-o' aria-hidden='true'></span>
 			</td>
 	   	</tr>
 	   	 
@@ -65,14 +65,14 @@
 				var uid = $(this).attr("uid");
 				//alert(uid);
 
-				$.post('delete_user_action.php', {uid: uid}, 
+				$.post('../delete_user_action.php', {uid: uid}, 
 					function() {
 					/*optional stuff to do after success */
 				}
 				).done(function(data){
 					//alert(data);
 					if(data == "true"){
-						get_usermanager();
+						get_user_manager();
 					}else{
 						alert("error");
 					}

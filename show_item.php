@@ -108,7 +108,7 @@
       </div>
       
     </div>
-  </div>
+</div>
 <script type="text/javascript">
 	$('.borrow').click(function(event) {
 		var item_id = $(this).attr('item-id');

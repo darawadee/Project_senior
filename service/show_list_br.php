@@ -120,7 +120,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 						  'error'
 						)
 				      }else{
-				      		$.post('service/update_status_br.php', {password: text,br_id:br_id,num_status:num_status}, function() {
+				      		$.post('../service/update_status_br.php', {password: text,br_id:br_id,num_status:num_status}, function() {
 				      			/*optional stuff to do after success */
 				      		}).done(function(data){
 				      			swal(data);
