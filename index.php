@@ -81,11 +81,11 @@
 
 		 				<?php 
 		 					if($_SESSION['data_user']["user_type"] == "3"){
-		 						echo "Admin";
+		 						echo "ผู้ดูแลระบบ";
 		 					}elseif($_SESSION['data_user']["user_type"] == "2"){
-		 						echo "Teacher";
+		 						echo "คุณครู";
 		 					}else{
-		 						echo "Student";
+		 						echo "นักเรียน";
 		 					}
 
 		 				 ?>
@@ -110,7 +110,7 @@
 
  		<div class="col-md-3" id="manu-L" style="height: 80vh ; background-color: #c8bece" >
  			<ul class="nav nav-pills nav-stacked" style="margin-right: 1px;">
-			  	<li class="active"><a href="#">Home</a></li>
+			  	<li class="active"><a href="index.php">หน้าหลัก</a></li>
 			  	<?php if($_SESSION['data_user']["user_type"] == "3"){?>
 				<!-- for admin -->
 			  	<li>
@@ -170,7 +170,7 @@
 		      </div>
 		      <div class="modal-footer">
 		      	 <button type="button" class="btn btn-info" id="conf">ยืนยัน</button>
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
 		      </div>
 		    </div>
 

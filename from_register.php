@@ -55,25 +55,25 @@
 			    <div class="form-group">
 			        <label for="user name">ชื่อผู้ใช้</label>
 			        <input type="text" class="form-control" name="user_name" 
-			        placeholder="Username">
+			        placeholder="ชื่อผู้ใช้">
 			    </div>
 			    <div class="form-group">
-			        <label for="password">Password</label>
+			        <label for="password">รหัสผ่าน</label>
 			        <input type="password" class="form-control" 
-			        name="password" placeholder="Password">
+			        name="password" placeholder="รหัสผ่าน">
 			    </div>
 			    <div class="form-group">
-			        <label for="email">Email</label>
+			        <label for="email">อีเมล์</label>
 			        <input type="email" class="form-control" 
-			        name="email" placeholder="Email">
+			        name="email" placeholder="อีเมล์">
 			    </div>
 			    <div class="form-group">
-			        <label for="telephone">Telephone</label>
+			        <label for="telephone">เบอร์โทรศัพท์</label>
 			        <input type="tel" class="form-control" name="telephone" 
-			        placeholder="Enter telephone number">
+			        placeholder="หมายเลขโทรศัพท์">
 			    </div>
 			    
-			    <button type="submit" class="btn btn-default"> Save </button>
+			    <button type="submit" class="btn btn-default"> บันทึก </button>
 			</form>
 		</div>
 	</div>

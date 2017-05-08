@@ -59,7 +59,7 @@
 					}else{
 					     $disabled = "";
 					}
-					echo "<div class='col-md-3 '>";
+					echo "<div class='col-md-4 '>";
 					echo "<div class='item' align='center'>";
 					echo "<img id='{$row['item_id']}'  src='img_item/{$row['item_img']}' style='height:150px;width: 150px;' > </img>";
 					
@@ -104,14 +104,14 @@
 	        			<input type="hidden" id="item-hide-id">
 	        			<input type="hidden" id="note" value="outclass">
 	        			</p>
-	        			<p><button type="submit" class="btn btn-info">ok</button></p>
+	        			<p><button type="submit" class="btn btn-info">ตกลง</button></p>
         		     </form>
         		</div>
         	</div>
           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
         </div>
       </div>
       

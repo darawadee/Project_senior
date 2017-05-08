@@ -222,11 +222,17 @@ echo '</table>';
 					$("#modal-borrow-table").modal('toggle');
 				}catch(e){
 					//alert(data);
-					swal(
-					  'ไม่สามารถยืมได้',
-					  data,
-					  'error'
-					)
+					swal({
+					  title: 'คำเตือน?',
+					  text: data,
+					  type: 'error',
+					  
+					  confirmButtonColor: '#3085d6',
+					  
+					  confirmButtonText: 'ตกลง',
+					  animation: true,
+  					customClass: 'animated tada'
+					})
 				}
 				//alert(data);
 			});

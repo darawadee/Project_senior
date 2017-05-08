@@ -18,7 +18,7 @@
 
 			}
 		}else{
-			echo "user password ไม่ถูกต้อง";
+			echo "รหัสผ่านผู้ใช้ ไม่ถูกต้อง";
 		}
 		//var_dump($res);
 	}else{

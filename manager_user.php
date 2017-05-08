@@ -14,13 +14,13 @@
 	    <th >รหัสนักเรียน</th>
 	    <th >ชื่อ</th>
 	    <th >นามสกุล</th>
-	    <th >Email</th>
-	    <th >User</th>
-	    <th >Password</th>
+	    <th >อีเมล์</th>
+	    <th >ชื่อผู้ใช้</th>
+	    <th >รหัสผ่าน</th>
 	    <th >ชั้นปี</th>
 	    <th >ห้อง</th>
 	    <th >เพศ</th>
-	    <th >Telephone</th>
+	    <th >เบอร์โทรศัพท์</th>
 	     <th ></th>
 	  </tr> 
 	  <?php 
@@ -51,7 +51,7 @@
 
 	   ?>
 	</table>
-	<a href="user_equipment.php" class="btn btn-success">
+	<a href="../user_equipment.php" class="btn btn-success">
 		
 		 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 		เพิ่มข้อมูลสมาชิก

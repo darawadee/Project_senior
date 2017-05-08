@@ -128,16 +128,18 @@ $(function(){
   });
 
   $("#btn-br-manager").click(function(event) {
-      //alert("รายการ");
-      $.get('../service/show_list_br.php', function() {
-        /*optional stuff to do after success */
-      }).done(function(data){
-        $("#content").html(data);
-
-      });
+      // alert("รายการ");
+     get_table_list();
     });
 });
+function get_table_list(){
+     $.get('../service/show_list_br.php', function() {
+          /*optional stuff to do after success */
+        }).done(function(data){
+          $("#content").html(data);
 
+        });
+  }
 
 function get_user_manager(){
   $.get('../manager_user.php', function() {
@@ -155,6 +157,7 @@ $.get('../manager.php', function() {
   $("#content").html(data);
 
 });
+
 
 }
 </script>

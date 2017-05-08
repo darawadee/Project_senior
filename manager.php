@@ -89,8 +89,8 @@
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+        <button type="button" class="btn btn-primary">บันทึกการเปลี่ยนแปลง</button>
       </div>
     </div>
   </div>
@@ -101,7 +101,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".delete-btn").click(function(event) {
-			var conf = confirm("คุณแรชน่ใจหรือไม่");
+			var conf = confirm("คุณแน่ใจหรือไม่");
 			var p_code = $(this).attr("p-code");
 			if(conf == true){
 				$.post('../delete_item.php', 

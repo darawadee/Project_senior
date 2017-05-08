@@ -121,7 +121,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 				  text: 'กรุณาใส่ password ของท่าน เพื่อทำการยืนยัน',
 				  input: 'password',
 				  showCancelButton: true,
-				  confirmButtonText: 'Submit',
+				  confirmButtonText: 'ยืนยัน',
 				  //showLoaderOnConfirm: true,
 				  preConfirm: function (text) {
 				   
@@ -137,7 +137,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 				      			/*optional stuff to do after success */
 				      		}).done(function(data){
 				      			swal(data);
-				      			
+				      			get_table_list();
 				      		});
 				      }
 				   
