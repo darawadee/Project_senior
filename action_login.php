@@ -10,7 +10,13 @@
 			$data = mysqli_fetch_assoc($res);
 			$_SESSION['data_user'] =$data;
 			$_SESSION['item_cart'] = array();
-			header('Location: index.php');
+
+			if($_SESSION['data_user']['user_type'] == '3'){
+				header('Location: admin/index.php');
+			}else {
+				header('Location: index.php');
+
+			}
 		}else{
 			echo "user password ไม่ถูกต้อง";
 		}

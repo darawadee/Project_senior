@@ -1,10 +1,17 @@
 <style type="text/css">
 	.item{
-		background-color: #83a2d3;
+		background-color: #e6ecf7;
 		height:auto;
 		padding: 20px;
 		margin-top: 10px;
+		border-radius: 10px;
 
+	}
+	.item:hover{
+		background-color: #becce5;
+		-webkit-box-shadow: 10px -9px 23px -10px rgba(0,0,0,0.75);
+		-moz-box-shadow: 10px -9px 23px -10px rgba(0,0,0,0.75);
+		box-shadow: 10px -9px 23px -10px rgba(0,0,0,0.75);
 	}
 </style>
 
@@ -56,7 +63,7 @@
 					echo "<div class='item' align='center'>";
 					echo "<img id='{$row['item_id']}'  src='img_item/{$row['item_img']}' style='height:150px;width: 150px;' > </img>";
 					
-					echo "<p id='Name-{$row['item_id']}'>{$row['item_name']} (<b>{$row['item_total']}</b>)</p>";
+					echo "<p id='Name-{$row['item_id']}'>{$row['item_name']} จำนวน (<b>{$row['item_total']}</b>) ชิ้น</p>";
 					echo "<button class='btn btn-info borrow' {$disabled} item-id='{$row['item_id']}'>ยืมอุปกรณ์</button>";
 					echo "</div>";
 
@@ -95,6 +102,7 @@
 	        			<p>
 	        			<input class="form-control" type="number" id="num-item" min="1" required="">
 	        			<input type="hidden" id="item-hide-id">
+	        			<input type="hidden" id="note" value="outclass">
 	        			</p>
 	        			<p><button type="submit" class="btn btn-info">ok</button></p>
         		     </form>
@@ -108,7 +116,7 @@
       </div>
       
     </div>
-  </div>
+</div>
 <script type="text/javascript">
 	$('.borrow').click(function(event) {
 		var item_id = $(this).attr('item-id');
@@ -128,7 +136,8 @@
 	$("form#modal-item").submit(function(event) {
 		let item_id = $("#item-hide-id").val();
 		let amount = $("#num-item").val();
-		$.post('service/service_session_cart.php', {item_id: item_id,amount:amount,method:'set'}, function() {
+		var note = $("#note").val();
+		$.post('service/service_session_cart.php', {item_id: item_id,amount:amount,method:'set',note:note}, function() {
 			
 		}).done(function(data){
 			if(data == 'true'){

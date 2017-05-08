@@ -44,6 +44,11 @@
  		.sub_menu{
  			background-color: #5774a5;
  		}
+
+		.no{ width : 100px; text-align : center;}
+		.highlight{ background-color :#5ed664; cursor: pointer;}
+		.title{ text-align : center;}
+
  	</style>
  </head>
  <body class="containers">
@@ -120,12 +125,14 @@
 				<!-- for admin -->
 				<?php }?>
 				<li>
-					<a href="#" class="main_manu">รายการอุปกรณ์<i class="fa fa-chevron-down pull-right"></i></a>
+					<a href="#" class="main_manu">ระบบยืม<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
-					<li><a href="#" class="item-list" item-type="1">กีฬาในร่ม</a></li>
+					<li><a href="#" id="table_subject">ตารางเรียน</a></li>
+					<li><a href="#" class="item-list" item-type="0">อุปกรณ์ทั้งหมด</a></li>
+					<!-- <li><a href="#" class="item-list" item-type="1">กีฬาในร่ม</a></li>
 					<li><a href="#" class="item-list" item-type="2">กีฬกลางแจ้ง</a></li>
 					<li><a href="#" class="item-list" item-type="3">อื่นๆ</a></li>
-					<li><a href="#" class="item-list" item-type="0">ทั้งหมด</a></li>
+					<li><a href="#" class="item-list" item-type="0">ทั้งหมด</a></li> -->
 					</ul>
 				</li>
 				<?php if($_SESSION['data_user']["user_type"] != "3"){?>
@@ -135,11 +142,7 @@
 				</li>
 				<?php }?>
 
-				<li>
-					<a href="#" class="main_manu">ตารางเรียน<i class="fa fa-chevron-down pull-right"></i></a>
-					<ul class="nav nav-show">
-					</ul>
-				</li>
+				
 				<li>
 					<a href="#" class="main_manu">ยื่นคำร้องขออุปกรณ์กีฬา<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
@@ -261,19 +264,16 @@
 
  			});
  		});
+
+ 		$("#table_subject").click(function(event) {
+ 			get_table_subject();
+ 			
+ 		});
  	});
 
-function get_manager(){
-	/* Act on the event */
-	$.get('manager.php', function() {
-		/*optional stuff to do after success */
 
-	}).done(function(data){
-		$("#content").html(data);
-		
-	});
 
-}
+
 function mount_info_tomodel(){
 	$.get('service/render_table_info_item.php', function() {
 		/*optional stuff to do after success */
@@ -314,7 +314,20 @@ function get_count_item(){
 		$("#count-item").text(data);
 	});
 }
+
+function get_table_subject(){
+	$.get('service/get_table_subject.php', function() {
+		
+	}).done(function(data){
+		$("#content").html(data);
+
+	});
+}
  	
+
+ 	$(function(){
+ 		get_table_subject();
+ 	});
  </script>
 
  </html>

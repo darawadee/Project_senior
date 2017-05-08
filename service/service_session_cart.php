@@ -4,7 +4,7 @@ include '../config_DB/DB_connect.php';
 // $connect is connect database
 
 	if($_POST['method'] == 'set'){
-
+		$_SESSION['note'] = $_POST['note'];
 		$id_item = $_POST['item_id'];
 		$amount  = $_POST['amount'];
 		$sqlcheck = "SELECT `item_total` FROM `sport_inventory` WHERE `item_id` = '{$id_item}'";

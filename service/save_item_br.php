@@ -8,7 +8,7 @@ $status = true;
 if(count($_SESSION["item_cart"]) > 0){
 	
 
-		$create_id_br = "INSERT INTO `borrow_table` ( `ref_user_id`, `borrow_date`) VALUES ('{$user_id}', '{$date}');";
+		$create_id_br = "INSERT INTO `borrow_table` ( `ref_user_id`, `borrow_date`,`br_type`) VALUES ('{$user_id}', '{$date}','{$_SESSION['note']}');";
 		if(mysqli_query($connect, $create_id_br)){
 			$get_br_id = "SELECT `borrow_id` FROM `borrow_table` WHERE `ref_user_id` = '{$user_id}' ORDER BY `borrow_id` DESC LIMIT 1";
 			if($res_get_br_id = mysqli_query($connect, $get_br_id) ){
