@@ -106,6 +106,8 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 
 
 
+
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		 
@@ -122,6 +124,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 				  input: 'password',
 				  showCancelButton: true,
 				  confirmButtonText: 'ยืนยัน',
+				  cancelButtonText: 'ยกเลิก',
 				  //showLoaderOnConfirm: true,
 				  preConfirm: function (text) {
 				   
