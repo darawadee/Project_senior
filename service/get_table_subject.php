@@ -186,6 +186,7 @@ echo '</table>';
 	        			<p>
 	        			<input class="form-control" type="number" id="num-item-table" min="1" required="">
 	        			<input type="hidden" id="item-hide-id-table">
+	        			<input type="hidden" id="note" value="inclass">
 	        			</p>
 	        			<p><button type="submit" class="btn btn-info">ok</button></p>
         		     </form>
@@ -236,7 +237,8 @@ echo '</table>';
 		$("form#modal-item-table").submit(function(event) {
 			let item_id = $("#item-hide-id-table").val();
 			let amount = $("#num-item-table").val();
-			$.post('service/service_session_cart.php', {item_id: item_id,amount:amount,method:'set'}, function() {
+			var note = $("#note").val();
+			$.post('service/service_session_cart.php', {item_id: item_id,amount:amount,method:'set',note:note}, function() {
 				
 			}).done(function(data){
 				if(data == 'true'){

@@ -13,13 +13,15 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 
 //var_dump($array_type_status);
 ?>
-<div style="height: 500px;">
+
+
 <?php if($_SESSION["data_user"]["user_type"] != 3) {?>
 <table class="table ">
 	<tr >
 		<th>เลขที่การยืม</th>
 		<th>อุปกรณ์ที่ยืม</th>
 		<th>วันเวลาที่ยืม</th>
+		<th>วันเวลาที่คืน</th>
 		<th>สถานะ</th>
 	</tr>
 	<?php 
@@ -32,6 +34,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 				<td ><?=$row['borrow_id'] ?></td>
 				<td><?php echo get_item_by_brID($row['borrow_id'],$user_id,$connect); ?></td>
 				<td><?=$row['borrow_date'] ?></td>
+				<td><?=$row['return_date'] ?></td>
 				<td><?=$row['status_msg'] ?></td>
 			</tr>
 	<?php 
@@ -40,7 +43,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 	?>
 </table>
 <?php }elseif($_SESSION["data_user"]["user_type"] == 3){ ?>
-	<table class="table table-hover">
+	<table class="table table-hover" id="br_table">
 		<tr >
 			<th>เลขที่การยืม</th>
 			<th>ผู้ยืม</th>
@@ -48,10 +51,11 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 			<th>อุปกรณ์ที่ยืม</th>
 			<th>วันเวลาที่ยืม</th>
 			<th>สถานะ</th>
+			<th>หมายเหตุ</th>
 			<th></th>
 		</tr>
 		<?php 
-		$sql_get_br = "SELECT * FROM `user_acount` INNER JOIN borrow_table on(user_acount.sudent_id=borrow_table.ref_user_id) INNER JOIN status_type ON (borrow_table.br_status=status_type.status_id) ORDER BY `borrow_table`.`borrow_id` DESC";
+		$sql_get_br = "SELECT * FROM `user_acount` INNER JOIN borrow_table on(user_acount.sudent_id=borrow_table.ref_user_id) INNER JOIN status_type ON (borrow_table.br_status=status_type.status_id) WHERE borrow_table.br_status != 4 ORDER BY `borrow_table`.`borrow_id` DESC";
 		$res_get_br = mysqli_query($connect, $sql_get_br);
 		while ($row_br = mysqli_fetch_assoc($res_get_br)) {
 			# code...
@@ -82,6 +86,10 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 				</select>
 
 			</td>
+			<td>
+				<?=($row_br['br_type'] == 'inclass') ? "ในเวลาเรียน" : "นอกเวลาเรียน" ?>
+
+			</td>
 			<td><button class="btn btn-info" borrow_id ="<?=$row_br['borrow_id'] ?>"> คืน </button></td>
 		</tr>
 		<?php }?>
@@ -95,9 +103,14 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 
 
 <?php } ?>
-</div>
+
+
+
 <script type="text/javascript">
 	$(document).ready(function() {
+		 
+            
+        
 		$('.status_update').change(function(event) {
 			var option_selected = $(this).find('option:selected'); 
 			var br_id = option_selected.attr('borrow_id');

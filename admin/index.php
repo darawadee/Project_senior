@@ -15,6 +15,7 @@
     <!-- CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/6.6.1/sweetalert2.min.css">
+    
     <title>Vali Admin</title>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
     <!--if lt IE 9
@@ -97,10 +98,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <h3 class="card-title">Getting Started</h3>
-              <div id="content"></div>
+          <div class="col-md-12" >
+            <div class="card" >
+             
+              <div id="content" style="height: auto;"></div>
             </div>
           </div>
         
@@ -113,6 +114,7 @@
     <script src="js/plugins/pace.min.js"></script>
     <script src="js/main.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/sweetalert2/6.6.1/sweetalert2.min.js"></script>
+   
   </body>
 </html>
 <script type="text/javascript">
@@ -131,6 +133,7 @@ $(function(){
         /*optional stuff to do after success */
       }).done(function(data){
         $("#content").html(data);
+
       });
     });
 });

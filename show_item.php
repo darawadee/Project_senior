@@ -95,6 +95,7 @@
 	        			<p>
 	        			<input class="form-control" type="number" id="num-item" min="1" required="">
 	        			<input type="hidden" id="item-hide-id">
+	        			<input type="hidden" id="note" value="outclass">
 	        			</p>
 	        			<p><button type="submit" class="btn btn-info">ok</button></p>
         		     </form>
@@ -128,7 +129,8 @@
 	$("form#modal-item").submit(function(event) {
 		let item_id = $("#item-hide-id").val();
 		let amount = $("#num-item").val();
-		$.post('service/service_session_cart.php', {item_id: item_id,amount:amount,method:'set'}, function() {
+		var note = $("#note").val();
+		$.post('service/service_session_cart.php', {item_id: item_id,amount:amount,method:'set',note:note}, function() {
 			
 		}).done(function(data){
 			if(data == 'true'){
