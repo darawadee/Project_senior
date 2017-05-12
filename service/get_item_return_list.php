@@ -31,8 +31,8 @@ $sql_select_item = "SELECT * FROM sport_inventory INNER JOIN `borrow_detail` ON 
 			echo "<td>{$row['item_return_amount']}</td>";
 			$max = $row['item_amount']*1 - $row['item_return_amount']*1;
 			$dis = ($row['item_amount']*1 == $row['item_return_amount']*1) ? "disabled" : "" ;
-			echo "<td><input class='form-control' type='number' min='1' max = '{$max}' name='{$row['item_id']}' {$dis}></td>";
-			echo "<td><input class='form-control' type='number' min='1' max = '{$row['item_amount']}' name='bad-{$row['item_id']}' value='0'></td>";
+			echo "<td><input class='form-control' type='number' min='1' max = '{$max}' name='return-item-{$row['item_id']}' {$dis}></td>";
+			echo "<td><input class='form-control' type='number' min='1' max = '{$row['item_amount']}' name='return-bad-{$row['item_id']}' value='0'></td>";
 			// var_dump($row);
 			
 			echo "</tr>";
@@ -48,13 +48,17 @@ $("#submit").click(function() {
 
 	var data = $("#return-form").serializeArray();
 	var br_id = $("#return-form").attr('br-id');
-
-	$.post('../service/save_item_return.php', {data:data,br_id:br_id }, function() {
+	var item = $("input[name^='return-item-']").serializeArray();
+	var item_bad = $("input[name^='return-bad-']").serializeArray();
+// 	alert(bad);
+// console.log(bad);
+	$.post('../service/save_item_return.php', {data:item,item_bad:item_bad,br_id:br_id }, function() {
 		/*optional stuff to do after success */
 	}).done(function(res){
 		try {
+			
 			var json_res = jQuery.parseJSON(res);
-			console.log(json_res);
+			
 			if(json_res.status == true){
 				swal({
 				   text: json_res.message,

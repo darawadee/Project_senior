@@ -3,18 +3,38 @@
 // var_dump($_POST);
 include '../config_DB/DB_connect.php';
 $item_not_null = array();
+$item_return_bad = array();
 $date = date("d-m-Y H:i:s");
 $return = array();
 // check data not null add array
+
+// var_dump($_POST);
+
 foreach ($_POST['data'] as $key => $value) {
 	if($value['value'] != null || $value['value']!= ""){
 		$item_not_null[] = array(
-			"item_id" => $value['name'],
+			"item_id" => str_replace("return-item-", "", $value['name']) ,
 			"amount"  => $value['value']
 		);
 	}
 }
-// check data not null add array
+
+foreach ($_POST['item_bad'] as $key => $value) {
+	
+	$item = str_replace("return-bad-", "", $value['name']);
+	$amount = $value['value'];
+	$sql_item_bad = "UPDATE `sport_inventory` SET `item_total`= `item_total` - '{$amount}',`item_bad`= `item_bad` + '{$value['value']}' WHERE  `item_id` = '{$item}'";
+
+	mysqli_query($connect,$sql_item_bad);
+	//echo $sql_item_bad."\n";
+}
+
+
+
+
+//var_dump($item_return_bad);
+
+// check data not null add array 
 
 $status_check_limit = true;
 // check item limit
