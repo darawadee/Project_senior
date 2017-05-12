@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/6.6.1/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/css/sweetalert2.min.css">
     
     <title>Vali Admin</title>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
@@ -113,7 +113,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/pace.min.js"></script>
     <script src="js/main.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/sweetalert2/6.6.1/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="../lib/js/sweetalert2.min.js"></script>
    
   </body>
 </html>

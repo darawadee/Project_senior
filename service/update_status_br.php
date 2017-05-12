@@ -46,7 +46,7 @@ if(check_pass($_POST['password'])){
  			}
 
  			
- 		}elseif($_POST['num_status'] == '4'){
+ 		}elseif($_POST['num_status'] == '5'){
  			$sql_select_item_id = "SELECT `item_id`,`item_amount` FROM `borrow_detail` WHERE `ref_borrow_id` = '{$_POST['br_id']}'";
  			if($res = mysqli_query($connect,$sql_select_item_id)){
  				while ($row = mysqli_fetch_assoc($res)) {
@@ -62,7 +62,7 @@ if(check_pass($_POST['password'])){
 		 						echo "คืนของยังไม่ครบ";
 		 					}else{
 
-		 						$sql_update_date_return = "UPDATE `borrow_table` SET `br_status`= '4',`return_date`='{$date}' WHERE  `borrow_id` = '{$_POST['br_id']}'";
+		 						$sql_update_date_return = "UPDATE `borrow_table` SET `br_status`= '5',`return_date`='{$date}' WHERE  `borrow_id` = '{$_POST['br_id']}'";
 		 						if(mysqli_query($connect,$sql_update_date_return)){
 			 						echo "คืนอุปกรณ์ครบแล้ว";
 

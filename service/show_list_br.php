@@ -4,7 +4,7 @@ session_start();
 include '../config_DB/DB_connect.php';
 $user_id = $_SESSION["data_user"]["sudent_id"];
 $array_type_status = array();
-$sql_select_type_msg = "SELECT * FROM `status_type`";
+$sql_select_type_msg = "SELECT * FROM `status_type` LIMIT 4";
 $res_select_type_msg = mysqli_query($connect, $sql_select_type_msg);
 while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 	$array_type_status[] = $row_type_msg;
@@ -41,6 +41,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 			}
 		}
 	?>
+	<!-- // for admin -->
 </table>
 <?php }elseif($_SESSION["data_user"]["user_type"] == 3){ ?>
 	<table class="table table-hover" id="br_table">
@@ -53,9 +54,10 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 			<th>สถานะ</th>
 			<th>หมายเหตุ</th>
 			<th></th>
+			
 		</tr>
 		<?php 
-		$sql_get_br = "SELECT * FROM `user_acount` INNER JOIN borrow_table on(user_acount.sudent_id=borrow_table.ref_user_id) INNER JOIN status_type ON (borrow_table.br_status=status_type.status_id) WHERE borrow_table.br_status != 4 ORDER BY `borrow_table`.`borrow_id` DESC";
+		$sql_get_br = "SELECT * FROM `user_acount` INNER JOIN borrow_table on(user_acount.sudent_id=borrow_table.ref_user_id) INNER JOIN status_type ON (borrow_table.br_status=status_type.status_id) WHERE borrow_table.br_status != 5 ORDER BY `borrow_table`.`borrow_id` DESC";
 		$res_get_br = mysqli_query($connect, $sql_get_br);
 		while ($row_br = mysqli_fetch_assoc($res_get_br)) {
 			# code...
@@ -70,17 +72,20 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 			<td>
 				<select class="form-control status_update" >
 				<?php 
+				error_reporting(0);
 					foreach ($array_type_status as $key => $array_type_stu) {
 						if($array_type_stu['status_id'] == $row_br['br_status'] ){
 							$selected = "selected";
 						}else{
 							$selected = "";
 						}
+						if($array_type_stu['status_id'] >= $row_br['br_status'] ){
 					
 				?>
 				<option  value="<?=$array_type_stu['status_id'] ?>" borrow_id ="<?=$row_br['borrow_id'] ?>" <?=$selected ?> > <?=$array_type_stu['status_msg']?> </option>
 
 				<?php 
+						}
 					}
 				?>
 				</select>
@@ -88,13 +93,36 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 			</td>
 			<td>
 				<?=($row_br['br_type'] == 'inclass') ? "ในเวลาเรียน" : "นอกเวลาเรียน" ?>
-
+				
 			</td>
-			<td><button class="btn btn-info" borrow_id ="<?=$row_br['borrow_id'] ?>"> คืน </button></td>
+			<td>
+			<?php if($row_br['br_status'] == '3' || $row_br['br_status'] == 3 || $row_br['br_status'] == '4' || $row_br['br_status'] == 4){?>
+				<button class='btn btn-info btn-return' br-id='<?=$row_br['borrow_id'] ?>'>คืน</button>
+			<?php }?>
+			</td>
+			
 		</tr>
 		<?php }?>
 	</table>
-
+<!-- Modal -->
+<div class="modal fade" id="return-modal-list" role="dialog">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">รายการยืมอุปกรณ์</h4>
+    </div>
+    <div class="modal-body">
+      <p>This is a large modal.</p>
+    </div>
+    <div class="modal-footer">
+    	
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Modal -->
 
 
 <?php }else{ ?>
@@ -111,42 +139,77 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 <script type="text/javascript">
 	$(document).ready(function() {
 		 
-            
-        
+        // change status______________________________________________
+
 		$('.status_update').change(function(event) {
 			var option_selected = $(this).find('option:selected'); 
 			var br_id = option_selected.attr('borrow_id');
 			var message = option_selected.text();
 			var num_status = $(this).val();
-				swal({
-				  title: 'คุณแน่ใจหรือไม่ ที่จะอัพเดทสถานะ เป็น '+message,
-				  text: 'กรุณาใส่ password ของท่าน เพื่อทำการยืนยัน',
-				  input: 'password',
-				  showCancelButton: true,
-				  confirmButtonText: 'ยืนยัน',
-				  cancelButtonText: 'ยกเลิก',
-				  //showLoaderOnConfirm: true,
-				  preConfirm: function (text) {
-				   
-				      //alert(text);
-				      if(text === ''){
-				      	swal(
-						  'Oops...',
-						  'กรุณาป้อน password',
-						  'error'
-						)
-				      }else{
-				      		$.post('../service/update_status_br.php', {password: text,br_id:br_id,num_status:num_status}, function() {
-				      			/*optional stuff to do after success */
-				      		}).done(function(data){
-				      			swal(data);
-				      			get_table_list();
-				      		});
-				      }
-				   
-				  } 
-				})
+				if(num_status != 4){
+					// ______________________________________________________________
+					swal({
+					  title: 'คุณแน่ใจหรือไม่ ที่จะอัพเดทสถานะ เป็น '+message,
+					  text: 'กรุณาใส่ password ของท่าน เพื่อทำการยืนยัน',
+					  input: 'password',
+					  showCancelButton: true,
+					  confirmButtonText: 'ยืนยัน',
+					  cancelButtonText: 'ยกเลิก',
+					  //showLoaderOnConfirm: true,
+					  preConfirm: function (text) {
+					   
+					      //alert(text);
+					      if(text === ''){
+					      	swal(
+							  'Oops...',
+							  'กรุณาป้อน password',
+							  'error'
+							)
+					      }else{
+					      		$.post('../service/update_status_br.php', {password: text,br_id:br_id,num_status:num_status}, function() {
+					      			/*optional stuff to do after success */
+					      		}).done(function(data){
+					      			swal(data);
+					      			get_table_list();
+					      		});
+					      }
+					   
+					  } 
+					});
+					// ______________________________________________________________
+					
+				}else{
+					
+				}
+
+
+				//คืนไม่ครบ__________________________________________________________
+		
+
+
+
+
+				//คืนไม่ครบ__________________________________________________________
 		});
+		   // change status______________________________________________
+
+
+		// event button return
+		$(".btn-return").click(function(event) {
+			var br_id = $(this).attr('br-id');
+
+			$.post('../service/get_item_return_list.php', {br_id:br_id}, function() {
+						/*optional stuff to do after success */
+			}).done(function(data){
+				$(".modal-body").html(data);
+				$("#return-modal-list").modal('show');
+
+
+				
+			});
+		
+		});
+		// event button return
 	});
 </script>
 
