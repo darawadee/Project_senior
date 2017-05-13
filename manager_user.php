@@ -40,8 +40,8 @@
 	   		<td><?=$row['gender'] ?></td>
 	   		<td><?=$row['telephone'] ?></td>
 	   		<td>
-	   		 <a href='#'  class='edit-btn btn btn-warning'><span class='fa fa-cog fa-lg' aria-hidden='true'></span>
-			<a id= href='#' uid="<?=$row['sudent_id'] ?>" class='btn_delete_user btn btn-danger'><span class='fa fa-trash-o' aria-hidden='true'></span>
+	   		 <a href='#' uid="<?=$row['sudent_id'] ?>"  class='btn_edit_user btn btn-warning'><span class='fa fa-cog fa-lg' aria-hidden='true'></span>
+			<a  href='#' uid="<?=$row['sudent_id'] ?>" class='btn_delete_user btn btn-danger'><span class='fa fa-trash-o' aria-hidden='true'></span>
 			</td>
 	   	</tr>
 	   	 
@@ -57,14 +57,34 @@
 		เพิ่มข้อมูลสมาชิก
 	</a>
 </body>
-	
-	<script type="text/javascript">
-		$(document).ready(function() {
-			
-			$(".btn_delete_user").click(function(event) {
-				var uid = $(this).attr("uid");
-				//alert(uid);
 
+<!-- Modal -->
+<div class="modal fade" id="edit_user_modal" role="dialog">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">แก้ไขข้อมูลผู้ใช้</h4>
+    </div>
+    <div class="modal-body">
+      <p>This is a large modal.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Modal -->
+	
+<script type="text/javascript">
+$(document).ready(function() {
+	// ___________________________________________
+	$(".btn_delete_user").click(function(event) {
+		var uid = $(this).attr("uid");
+		//alert(uid);
+		var conf = confirm("คุณแน่ใจหรือไม่");
+			if(conf){
 				$.post('../delete_user_action.php', {uid: uid}, 
 					function() {
 					/*optional stuff to do after success */
@@ -77,9 +97,22 @@
 						alert("error");
 					}
 				});
-
 				
-			});
+			}	
+	});
+	// ___________________________________________
+
+	$(".btn_edit_user").click(function(event) {
+		var UID =  $(this).attr('uid');
+
+		$.post('../from/from_edit_user.php', {uid: UID}, function() {
+			/*optional stuff to do after success */
+		}).done(function(data){
+			$(".modal-body").html(data);
+			$("#edit_user_modal").modal("toggle");
+
 		});
-	</script>
+	});
+});
+</script>
 </html>

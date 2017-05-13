@@ -33,6 +33,7 @@
 				<td>รูป</td>
 				<td>จำนวนทั้งหมด</td>
 				<td>จำนวนคงเหลือ</td>
+				<td>จำนวนที่ชำรุด</td>
 				<td>ชนิดอุปกรณ์</td>
 				<td></td>
 			</tr>
@@ -48,6 +49,7 @@
 						echo "<td><img src='../img_item/{$row['item_img']}' style='width: 50px;height: 50px;'></td>";
 						echo "<td>{$row['item_all']}</td>";
 						echo "<td>{$row['item_total']}</td>";
+						echo "<td>{$row['item_bad']}</td>";
 						echo "<td>{$config[$row['item_type']]}</td>";
 						echo "<td>";
 						echo "<a href='#' class='edit-btn btn btn-warning' p-code='{$row['item_id']}'><span class='fa fa-cog fa-lg' aria-hidden='true'></span>";
@@ -77,8 +79,8 @@
 <!-- /model -->
 <!-- Modal -->
 <div class="modal fade" id="myModal_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content ">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

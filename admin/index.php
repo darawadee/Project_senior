@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/6.6.1/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/css/sweetalert2.min.css">
     
     <title>Vali Admin</title>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
@@ -69,7 +69,7 @@
           </div>
           <!-- Sidebar Menu-->
           <ul class="sidebar-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+            <li class="active"><a href="#" id="btn-dashbroad"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
             <li class="treeview"><a href="#"><i class="fa fa-laptop"></i><span>ระบบจัดการ</span><i class="fa fa-angle-right"></i></a>
               <ul class="treeview-menu">
                 <li><a href="#" id='btn-item-manager'><i class="fa fa-circle-o"></i> จัดการอุปกรณ์กีฬา</a></li>
@@ -113,12 +113,18 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/pace.min.js"></script>
     <script src="js/main.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/sweetalert2/6.6.1/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="../lib/js/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script>
+    <script type="text/javascript" src="js/highcharts-3d.js"></script>
+
    
   </body>
 </html>
 <script type="text/javascript">
 $(function(){
+  $("#btn-dashbroad").click(function(event) {
+    get_dashbord();
+  });
   $("#btn-usermanager").click(function(event) {
       get_user_manager();
       //alert(444);
@@ -131,7 +137,14 @@ $(function(){
       // alert("รายการ");
      get_table_list();
     });
+  
+   get_dashbord();
+
 });
+
+
+
+
 function get_table_list(){
      $.get('../service/show_list_br.php', function() {
           /*optional stuff to do after success */
@@ -149,15 +162,27 @@ function get_user_manager(){
   });
 }
 function get_item_manager(){
-/* Act on the event */
-$.get('../manager.php', function() {
-/*optional stuff to do after success */
+  /* Act on the event */
+  $.get('../manager.php', function() {
+  /*optional stuff to do after success */
 
-}).done(function(data){
-  $("#content").html(data);
+  }).done(function(data){
+    $("#content").html(data);
 
-});
-
+  });
 
 }
+function get_dashbord(){
+  $.get('report/dashbord.php', function() {
+    
+  }).done(function(data){
+      $("#content").html(data);
+  });
+}
+
+
+  
+
+
+
 </script>
