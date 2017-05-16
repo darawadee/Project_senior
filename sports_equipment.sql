@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2017 at 01:25 AM
+-- Generation Time: May 16, 2017 at 05:32 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -119,6 +119,28 @@ INSERT INTO `master_name_table` (`Master_id`, `Master_name`) VALUES
 (00004, 'ครูธีระศักดิ์'),
 (00005, 'ครูดำรง'),
 (00006, 'ครูจิราพร');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_item_table`
+--
+
+CREATE TABLE `request_item_table` (
+  `request_id` int(10) NOT NULL,
+  `item_type` int(2) NOT NULL,
+  `request_content` text NOT NULL,
+  `user_id_ref` int(10) NOT NULL,
+  `date` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `request_item_table`
+--
+
+INSERT INTO `request_item_table` (`request_id`, `item_type`, `request_content`, `user_id_ref`, `date`) VALUES
+(2, 1, 'ต้องการลูกบอลเยอะๆครับ', 1234567883, '16-05-2017 17:07:50'),
+(3, 1, 'เอาบาส\nเอาลูกบอล\nเอาห่วงยาง', 1234567883, '16-05-2017 17:28:23');
 
 -- --------------------------------------------------------
 
@@ -314,6 +336,12 @@ ALTER TABLE `master_name_table`
   ADD PRIMARY KEY (`Master_id`);
 
 --
+-- Indexes for table `request_item_table`
+--
+ALTER TABLE `request_item_table`
+  ADD PRIMARY KEY (`request_id`);
+
+--
 -- Indexes for table `sport_inventory`
 --
 ALTER TABLE `sport_inventory`
@@ -356,6 +384,11 @@ ALTER TABLE `borrow_table`
 --
 ALTER TABLE `master_name_table`
   MODIFY `Master_id` int(5) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `request_item_table`
+--
+ALTER TABLE `request_item_table`
+  MODIFY `request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `subjects_table`
 --

@@ -77,7 +77,7 @@
                 <li><a href="#" id='btn-br-manager'><i class="fa fa-circle-o"></i> อัพเดทสถานะยืม/คืนอุปกรณ์กีฬา</a></li>
               </ul>
             </li>
-            <li class="treeview"><a href="#"><i class="fa fa-laptop"></i><span>รายการคำร้อง</span><i class="fa fa-angle-right"></i></a>
+            <li class="treeview"><a href="#" id="btn-request"><i class="fa fa-laptop"></i><span>รายการคำร้อง</span><i class="fa fa-angle-right"></i></a>
             </li>
               </ul>
             </li>
@@ -136,7 +136,11 @@ $(function(){
   $("#btn-br-manager").click(function(event) {
       // alert("รายการ");
      get_table_list();
-    });
+  });
+
+  $("#btn-request").click(function(event) {
+    get_read_request();
+  });
   
    get_dashbord();
 
@@ -156,6 +160,14 @@ function get_table_list(){
 
 function get_user_manager(){
   $.get('../manager_user.php', function() {
+    /*optional stuff to do after success */
+  }).done(function(data){
+    $("#content").html(data);
+  });
+}
+
+function get_read_request(){
+  $.get('service_admin/read_request_table.php', function(data) {
     /*optional stuff to do after success */
   }).done(function(data){
     $("#content").html(data);
