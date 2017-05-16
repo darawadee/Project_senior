@@ -87,9 +87,9 @@ function getTimeRange($timeT, $timeCol){
 	}
 	return $data;
 }
-
+echo "<center><h1>ตารางเรียนวิชา พละ </h1></center>";
 $list = "";
-echo '<table class="table" border="1" width="90%" align="center" cellspacing="0">';
+echo '<table class="table" border="1" width="90%" align="center" cellspacing="0" style="margin-top: 30px">';
 echo '<tr><td>&nbsp;</td>'. createCol( $timeArr ) .'</tr>';
 foreach($timeTeach as $i=>$arr){
 
@@ -176,7 +176,7 @@ echo '</table>';
         </div>
         <div class="modal-body">
         	<div class="row">
-        		<div class="col-md-3">
+        		<div class="col-md-3" >
         			<img id="modal-img-table" style="width:100%;height: 100%;" />
         		</div>
         		<div class="col-md-9">

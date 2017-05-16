@@ -108,7 +108,7 @@
  	
  	<div class="row" >
 
- 		<div class="col-md-3" id="manu-L" style="height: 80vh ; background-color: #c8bece" >
+ 		<div class="col-md-3" id="manu-L" style="height: 80vh ; background-color: #c8bece; padding-right: 0px" >
  			<ul class="nav nav-pills nav-stacked" style="margin-right: 1px;">
 			  	<li class="active"><a href="index.php">หน้าหลัก</a></li>
 			  	<?php if($_SESSION['data_user']["user_type"] == "3"){?>
@@ -144,7 +144,7 @@
 
 				
 				<li>
-					<a href="#" class="main_manu">ยื่นคำร้องขออุปกรณ์กีฬา<i class="fa fa-chevron-down pull-right"></i></a>
+					<a href="#" id="btn_request" class="main_manu">ยื่นคำร้องขออุปกรณ์กีฬา<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
 					</ul>
 				</li>
@@ -218,6 +218,11 @@
  		$("#btn-usermanager").click(function(event) {
  			get_usermanager();
  			//alert(444);
+ 		});
+
+
+ 		$("#btn_request").click(function(event) {
+ 			get_form_request();
  		});
 
  		$(".item-list").click(function(event) {
@@ -317,6 +322,15 @@ function get_count_item(){
 
 function get_table_subject(){
 	$.get('service/get_table_subject.php', function() {
+		
+	}).done(function(data){
+		$("#content").html(data);
+
+	});
+}
+
+function get_form_request(){
+	$.get('from/form_request_item.php', function() {
 		
 	}).done(function(data){
 		$("#content").html(data);
