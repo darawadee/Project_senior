@@ -117,7 +117,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
     </div>
     <div class="modal-footer">
     	
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
     </div>
   </div>
 </div>
@@ -150,7 +150,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 					// ______________________________________________________________
 					swal({
 					  title: 'คุณแน่ใจหรือไม่ ที่จะอัพเดทสถานะ เป็น '+message,
-					  text: 'กรุณาใส่ password ของท่าน เพื่อทำการยืนยัน',
+					  text: 'กรุณาใส่ Password ของท่าน เพื่อทำการยืนยัน',
 					  input: 'password',
 					  showCancelButton: true,
 					  confirmButtonText: 'ยืนยัน',
@@ -169,7 +169,10 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 					      		$.post('../service/update_status_br.php', {password: text,br_id:br_id,num_status:num_status}, function() {
 					      			/*optional stuff to do after success */
 					      		}).done(function(data){
-					      			swal(data);
+					      			swal({
+					      				text:data,
+					      				confirmButtonText: 'ตกลง'
+					      			});
 					      			get_table_list();
 					      		});
 					      }

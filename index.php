@@ -96,7 +96,7 @@
 			       <button   class="btn btn btn-info navbar-btn" id="info-cart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> </span> (<b id="count-item">0</b>)</button>
 			      <!-- <button class="btn btn-info" id="info-cart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> </span>(<b id="count-item">0</b>)</button> -->
 				</li>			      
-			     <li> <a href="action_logout.php" class="btn btn-default">ออกจากระบบ</a></li>
+			     <li> <a href="action_logout.php" class="btn btn-default"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> ออกจากระบบ</a></li>
 
 			   
 			    </ul>
@@ -110,8 +110,8 @@
 
  		<div class="col-md-3" id="manu-L" style="height: 80vh ; background-color: #c8bece; padding-right: 0px" >
  			<ul class="nav nav-pills nav-stacked" style="margin-right: 1px;">
-			  	<li class="active"><a href="index.php">หน้าหลัก</a></li>
-			  	<?php if($_SESSION['data_user']["user_type"] == "3"){?>
+			  	<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> หน้าหลัก</a></li>
+			  	<?php if($_SESSION['data_user']["user_type"] == "2"){?>
 				<!-- for admin -->
 			  	<li>
 					<a href="#" class="main_manu">ผู้ดูแลระบบ<i class="fa fa-chevron-down pull-right"></i></a>
@@ -125,7 +125,7 @@
 				<!-- for admin -->
 				<?php }?>
 				<li>
-					<a href="#" class="main_manu">ระบบยืม<i class="fa fa-chevron-down pull-right"></i></a>
+					<a href="#" class="main_manu"><span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> ระบบยืมอุปกรณ์กีฬา<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
 					<li><a href="#" id="table_subject">ตารางเรียน</a></li>
 					<li><a href="#" class="item-list" item-type="0">อุปกรณ์ทั้งหมด</a></li>
@@ -138,13 +138,13 @@
 				<?php if($_SESSION['data_user']["user_type"] != "3"){?>
 				<!-- for admin -->
 				<li>
-					<a href="#" id="list_br" class="main_manu">รายการยืมคืน<i class="fa fa-chevron-down pull-right"></i></a>
+					<a href="#" id="list_br" class="main_manu"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> รายการยืมคืนอุปกรณ์กีฬา<i class="fa fa-chevron-down pull-right"></i></a>
 				</li>
 				<?php }?>
 
 				
 				<li>
-					<a href="#" id="btn_request" class="main_manu">ยื่นคำร้องขออุปกรณ์กีฬา<i class="fa fa-chevron-down pull-right"></i></a>
+					<a href="#" id="btn_request" class="main_manu"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> ยื่นคำร้องขออุปกรณ์กีฬา<i class="fa fa-chevron-down pull-right"></i></a>
 					<ul class="nav nav-show">
 					</ul>
 				</li>
