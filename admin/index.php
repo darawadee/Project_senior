@@ -15,7 +15,7 @@
     <!-- CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="../lib/css/sweetalert2.min.css">
-    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <title>Vali Admin</title>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
     <!--if lt IE 9
@@ -105,6 +105,7 @@
     <script type="text/javascript" src="../lib/js/sweetalert2.min.js"></script>
     <script type="text/javascript" src="js/highcharts.js"></script>
     <script type="text/javascript" src="js/highcharts-3d.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
    
   </body>
