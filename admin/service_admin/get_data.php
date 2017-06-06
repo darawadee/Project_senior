@@ -69,6 +69,7 @@
 		array_push($array_box, $array_br);
 		array_push($array_box, $array_return);
 		$return['borrow_report'] = $array_box;
+		$return['year'] = $year;
 
 
 	$sql_item_popular = "SELECT sport_inventory.item_name as name ,count(*) as y FROM `borrow_detail` INNER JOIN sport_inventory on(borrow_detail.item_id=sport_inventory.item_id) GROUP BY `borrow_detail`.`item_id`";
