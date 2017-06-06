@@ -38,7 +38,7 @@
               <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a>
                 <ul class="dropdown-menu settings-menu">
                   <li><a href="index.php"><i class="fa fa-home" aria-hidden="true"></i>หน้าหลัก</a></li>
-                  <li><a href="../login_from.html"><i class="fa fa-sign-out fa-lg"></i>ออกจากระบบ</a></li>
+                  <li><a href="../action_logout.php"><i class="fa fa-sign-out fa-lg"></i>ออกจากระบบ</a></li>
                 </ul>
               </li>
             </ul>
@@ -69,6 +69,9 @@
             </li>
             <li class="treeview"><a href="#" id="btn-request"><i class="fa fa-commenting" aria-hidden="true"></i><span>รายการคำร้อง</span><i class="fa fa-angle-right"></i></a>
             </li>
+
+            
+            </li>
               </ul>
             </li>
           </ul>
@@ -77,7 +80,7 @@
       <div class="content-wrapper">
         <div class="page-title">
           <div>
-            <h1><i class="fa fa-dashboard"></i> รายงานข้อมูล</h1>
+            
           </div>
           <!-- <div>
             <ul class="breadcrumb">

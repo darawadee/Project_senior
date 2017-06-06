@@ -40,14 +40,14 @@ if(count($_SESSION["item_cart"]) > 0){
 				if($status){
 					echo "true";
 				}else{
-					echo "บัรทึกข้อมูลเรียบร้อย {$massage}";
+					echo "บันทึกข้อมูลเรียบร้อย {$massage}";
 				}
 			}else{
-				echo "ระบบขัดข้องกรุณารองใหม่";
+				echo "ระบบขัดข้องกรุณาลองใหม่";
 				die();
 			}
 		}else{
-			echo "ระบบขัดข้องกรุณารองใหม่";
+			echo "ระบบขัดข้องกรุณาลองใหม่";
 			die();
 		}
 		//echo $create_id_br."\n";

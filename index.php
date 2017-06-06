@@ -3,7 +3,7 @@
 	// var_dump($_SESSION);
 	// echo $_SESSION['["data_user"']['["fname"'];
 	// echo $_SESSION['["data_user"']['["lname"'];
-	if(isset($_SESSION['data_user'])){
+	if(isset($_SESSION['data_user']) == true){
 		// login แล้ว	
 	}else{
 		header('Location: login_from.html');
@@ -111,7 +111,7 @@
  		<div class="col-md-3" id="manu-L" style="height: 80vh ; background-color: #c8bece; padding-right: 0px" >
  			<ul class="nav nav-pills nav-stacked" style="margin-right: 1px;">
 			  	<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> หน้าหลัก</a></li>
-			  	<?php if($_SESSION['data_user']["user_type"] == "2"){?>
+			  	<?php if($_SESSION['data_user']["user_type"] == "3"){?>
 				<!-- for admin -->
 			  	<li>
 					<a href="#" class="main_manu">ผู้ดูแลระบบ<i class="fa fa-chevron-down pull-right"></i></a>
@@ -136,7 +136,7 @@
 					</ul>
 				</li>
 				<?php if($_SESSION['data_user']["user_type"] != "3"){?>
-				<!-- for admin -->
+				
 				<li>
 					<a href="#" id="list_br" class="main_manu"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> รายการยืมคืนอุปกรณ์กีฬา<i class="fa fa-chevron-down pull-right"></i></a>
 				</li>

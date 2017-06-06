@@ -70,7 +70,7 @@
       <p>This is a large modal.</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
     </div>
   </div>
 </div>

@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6"> <br />
-      <h4 align="center"> ฟอร์มอุปกรณ์กีฬา </h4>
+      <h4 align="center"> ฟอร์มเพิ่มอุปกรณ์กีฬา </h4>
       <hr />
       <form action="add_item.php" method="POST" enctype="multipart/form-data"  name="addprd" class="form-horizontal" id="addprd">
         <div class="form-group">
