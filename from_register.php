@@ -3,6 +3,7 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
+	<script type="text/javascript" src="lib/js/jquery-3.2.0.js"></script>
 </head>
 <body>
 	<div class="row">
@@ -11,17 +12,17 @@
 			    <div class="form-group">
 			        <label for="name">ชื่อ</label>
 			        <input type="text" class="form-control" name="fname" 
-			        placeholder="กรอกชื่อ">
+			        placeholder="กรอกชื่อ" pattern="[ก-๙]{1,}" title="ใส้ตัวอักษรไทยเท่านั้น">
 			    </div>
 			    <div class="form-group">
 			        <label for="last name">นามสกุล</label>
 			        <input type="text" class="form-control" name="lname" 
-			        placeholder="นามสกุล">
+			        placeholder="นามสกุล" pattern="[ก-๙]{1,}" title="ใส้ตัวอักษรไทยเท่านั้น">
 			    </div>
 			    <div class="form-group">
 			        <label for="id">รหัส</label>
-			        <input type="text" class="form-control" name="sudent id" 
-			        placeholder="รหัสนักเรียน">
+			        <input type="text" class="form-control" name="sudent_id" 
+			        placeholder="รหัสนักเรียน" pattern="[0-9]{10}" title="ใส่แต่ตัวเขลเท่านั้น และ 10 หลัก">
 			    </div>
 			    <div class="form-group">
 			        <label for="class">ชั้นปี</label>
@@ -55,12 +56,12 @@
 			    <div class="form-group">
 			        <label for="user name">ชื่อผู้ใช้</label>
 			        <input type="text" class="form-control" name="user_name" 
-			        placeholder="ชื่อผู้ใช้">
+			        placeholder="ชื่อผู้ใช้" pattern="[a-zA-Z0-9]{6,}" title="ไม่สามารถใส้ภาษาไทยได้">
 			    </div>
 			    <div class="form-group">
 			        <label for="password">รหัสผ่าน</label>
 			        <input type="password" class="form-control" 
-			        name="password" placeholder="รหัสผ่าน">
+			        name="password" placeholder="รหัสผ่าน" pattern="[a-zA-Z0-9]{6,}" title="ไม่สามารถใส้ภาษาไทยได้">
 			    </div>
 			    <div class="form-group">
 			        <label for="email">อีเมล์</label>
@@ -70,13 +71,22 @@
 			    <div class="form-group">
 			        <label for="telephone">เบอร์โทรศัพท์</label>
 			        <input type="tel" class="form-control" name="telephone" 
-			        placeholder="หมายเลขโทรศัพท์">
+			        placeholder="หมายเลขโทรศัพท์" >
 			    </div>
 			    
-			    <button type="submit" class="btn btn-default"> บันทึก </button>
+			    <button type="submit" class="btn btn-success"> บันทึก </button>
+			     <button id="reset" class="btn btn-danger"> เริ่มใหม่ </button>
 			</form>
 		</div>
 	</div>
-	
+	<script type="text/javascript">
+		$(function(){
+			$('input').attr('required', '');
+
+			$("#reset").click(function(event) {
+				$("input").val('');
+			});
+		});
+	</script>
 </body>
 </html>

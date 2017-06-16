@@ -93,7 +93,7 @@
         <p>Some text in the modal.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
       </div>
     </div>
 
@@ -275,7 +275,14 @@ var sub_title = "";
 	// Create the chart
 Highcharts.chart(target_, {
     chart: {
-        type: 'column'
+        type: 'column',
+        options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+        }
     },
     title: {
         text: title
@@ -309,7 +316,6 @@ Highcharts.chart(target_, {
                            }).done(function(data){
                            		$('#title-modal-dashbord').html(sub_title);
 		                      	$("#modal-dashbord-content").html(data);
-
 		                      	$("#modal-dashbord").modal('toggle');
 		                      	$('#table_br_new').DataTable();
                            });

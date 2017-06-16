@@ -18,7 +18,9 @@
 
 			}
 		}else{
-			echo "รหัสผ่านผู้ใช้ ไม่ถูกต้อง";
+			header('Location: login_from.php?login=false');
+
+			//echo "รหัสผ่านผู้ใช้ ไม่ถูกต้อง";
 		}
 		//var_dump($res);
 	}else{
