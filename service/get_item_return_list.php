@@ -27,9 +27,9 @@ $sql_select_item = "SELECT * FROM sport_inventory INNER JOIN `borrow_detail` ON 
 			echo "<tr>";
 			echo "<td><img style='width: 80px;height: 80px;' src='../img_item/{$row['item_img']}'></td>";
 			echo "<td>{$row['item_name']}</td>";
-			echo "<td>{$row['item_amount']}</td>";
+			echo "<td >{$row['item_amount']}</td>";
 			echo "<td>{$row['item_return_amount']}</td>";
-			$max = $row['item_amount']*1 - $row['item_return_amount']*1;
+			$max = ($row['item_amount']*1) - ($row['item_return_amount']*1);
 			$dis = ($row['item_amount']*1 == $row['item_return_amount']*1) ? "disabled" : "" ;
 			echo "<td><input class='form-control' type='number' min='1' max = '{$max}' name='return-item-{$row['item_id']}' {$dis}></td>";
 			echo "<td><input class='form-control' type='number' min='1' max = '{$row['item_amount']}' name='return-bad-{$row['item_id']}' value='0'></td>";

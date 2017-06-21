@@ -26,7 +26,7 @@ if($_POST['type'] == 'ยืม'){
 <table class='table' id='table_br_new'>
 	<thead>
 	<tr>
-		<th>ชื้อ</th>
+		<th>ชื่อ</th>
 		<th>อุปกรณ์ที่ยืม</th>
 		<th>วันที่ยืม</th>
 		
@@ -60,7 +60,7 @@ if($_POST['type'] == 'ยืม'){
 <table class='table' id='table_br_new'>
 	<thead>
 	<tr>
-		<th>ชื้อ</th>
+		<th>ชื่อ</th>
 		<th>อุปกรณ์ที่คืน</th>
 		<th>วันที่ยืม</th>
 		

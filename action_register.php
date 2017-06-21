@@ -20,7 +20,7 @@
 				$sql_insert .="  VALUES ('{$_POST['email']}','{$_POST['sudent_id']}', '{$_POST['fname']}', '{$_POST['lname']}', '{$_POST['class']}', '{$_POST['sec']}', '{$_POST['gender']}', '{$_POST['user_name']}', '{$_POST['password']}', '{$_POST['telephone']}');";
 				if(mysqli_query($connect,$sql_insert)){
 					echo "สมัครสมาชิกสำเร็จ";
-					var_dump($_SESSION);
+					//var_dump($_SESSION);
 					if(isset($_SESSION['data_user'])){
 						if($_SESSION['data_user']["user_type"] == "3"){
 							header('Location: admin/index.php');

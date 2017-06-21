@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2017 at 05:32 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Generation Time: Jun 21, 2017 at 08:49 PM
+-- Server version: 10.1.22-MariaDB
+-- PHP Version: 7.0.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -34,31 +36,6 @@ CREATE TABLE `borrow_detail` (
   `item_return_amount` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `borrow_detail`
---
-
-INSERT INTO `borrow_detail` (`detail_id`, `ref_borrow_id`, `item_id`, `item_amount`, `item_return_amount`) VALUES
-(38, 000028, 'I002', 2, 2),
-(39, 000028, 'I003', 2, 2),
-(40, 000029, 'I001', 2, 2),
-(41, 000030, 'I001', 2, 2),
-(42, 000031, 'I001', 2, 2),
-(43, 000032, 'I001', 2, 2),
-(44, 000033, 'I001', 2, 2),
-(45, 000034, 'I001', 2, 2),
-(46, 000035, 'I001', 3, 3),
-(47, 000036, 'I001', 2, 2),
-(48, 000037, 'I001', 2, 2),
-(49, 000038, 'I001', 2, 2),
-(50, 000039, 'I002', 2, 2),
-(51, 000040, 'I002', 3, 3),
-(52, 000040, 'I003', 3, 3),
-(53, 000041, 'I001', 2, 2),
-(54, 000042, 'I001', 2, 2),
-(55, 000043, 'I005', 3, 3),
-(56, 000044, 'I008', 1, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -67,35 +44,12 @@ INSERT INTO `borrow_detail` (`detail_id`, `ref_borrow_id`, `item_id`, `item_amou
 
 CREATE TABLE `borrow_table` (
   `borrow_id` int(6) UNSIGNED ZEROFILL NOT NULL,
-  `ref_user_id` int(10) NOT NULL,
+  `ref_user_id` varchar(10) NOT NULL,
   `borrow_date` text NOT NULL,
   `return_date` varchar(20) NOT NULL DEFAULT '-',
   `br_status` int(11) NOT NULL DEFAULT '1',
   `br_type` set('inclass','outclass','','') NOT NULL DEFAULT 'outclass'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `borrow_table`
---
-
-INSERT INTO `borrow_table` (`borrow_id`, `ref_user_id`, `borrow_date`, `return_date`, `br_status`, `br_type`) VALUES
-(000028, 1234567883, '12-05-2017 15:41:24', '12-05-2017 15:46:20', 5, 'outclass'),
-(000029, 1234567883, '12-05-2017 15:46:46', '12-05-2017 15:48:17', 5, 'outclass'),
-(000030, 1234567883, '12-05-2017 15:49:37', '12-05-2017 15:50:48', 5, 'outclass'),
-(000031, 1234567883, '12-05-2017 15:54:15', '12-05-2017 15:55:49', 5, 'outclass'),
-(000032, 1234567883, '12-05-2017 15:56:53', '12-05-2017 15:59:15', 5, 'outclass'),
-(000033, 1234567883, '12-05-2017 16:02:01', '12-05-2017 16:06:17', 5, 'outclass'),
-(000034, 1234567883, '12-05-2017 16:10:08', '12-05-2017 16:11:03', 5, 'outclass'),
-(000035, 1234567883, '12-05-2017 16:15:33', '12-05-2017 16:16:53', 5, 'outclass'),
-(000036, 1234567883, '12-05-2017 16:30:21', '12-05-2017 16:32:44', 5, 'outclass'),
-(000037, 1234567883, '12-05-2017 16:33:09', '12-05-2017 16:34:44', 5, 'outclass'),
-(000038, 1234567883, '12-05-2017 17:10:58', '12-05-2017 17:17:31', 5, 'outclass'),
-(000039, 1234567883, '12-05-2017 17:19:36', '12-05-2017 17:43:04', 5, 'outclass'),
-(000040, 1234567883, '12-05-2017 17:44:28', '12-05-2017 17:45:14', 5, 'outclass'),
-(000041, 1234567883, '12-05-2017 23:52:28', '01-04-2017 23:56:57', 5, 'outclass'),
-(000042, 1234567883, '01-04-2017 23:55:06', '01-04-2017 23:57:04', 5, 'outclass'),
-(000043, 1234567883, '13-05-2017 00:55:30', '13-05-2017 00:56:10', 5, 'outclass'),
-(000044, 1234567883, '13-05-2017 01:23:56', '-', 1, 'outclass');
 
 -- --------------------------------------------------------
 
@@ -140,7 +94,11 @@ CREATE TABLE `request_item_table` (
 
 INSERT INTO `request_item_table` (`request_id`, `item_type`, `request_content`, `user_id_ref`, `date`) VALUES
 (2, 1, 'ต้องการลูกบอลเยอะๆครับ', 1234567883, '16-05-2017 17:07:50'),
-(3, 1, 'เอาบาส\nเอาลูกบอล\nเอาห่วงยาง', 1234567883, '16-05-2017 17:28:23');
+(3, 1, 'เอาบาส\nเอาลูกบอล\nเอาห่วงยาง', 1234567883, '16-05-2017 17:28:23'),
+(4, 1, 'อยากได้ลูกปิงปองเพิ่ม', 1234567883, '16-05-2017 12:40:45'),
+(5, 2, 'อยากได้ลูกเปตองใหม่', 1234567883, '21-05-2017 07:40:17'),
+(6, 2, 'ืเัะ่ะ่ะ่ัะั่ะั่', 1234567883, '27-05-2017 10:47:06'),
+(7, 2, 'อยากได้ลูกฟุตบอลเพิ่ม 40 ลูก', 23, '30-05-2017 07:54:53');
 
 -- --------------------------------------------------------
 
@@ -163,14 +121,14 @@ CREATE TABLE `sport_inventory` (
 --
 
 INSERT INTO `sport_inventory` (`item_id`, `item_name`, `item_img`, `item_all`, `item_total`, `item_bad`, `item_type`) VALUES
-('I001', 'วอลเลย์บอลล', 'ball1.jpg', 40, 40, 0, 1),
-('I002', 'บาสเกสบอล', 'ball.jpg', 40, 37, 3, 1),
-('I003', 'แชร์บอลบอล', 'chairball.jpg', 10, 8, 2, 1),
+('I001', 'วอลเลย์บอลล2', 'ball1.jpg', 40, 28, 0, 1),
+('I002', 'บาสเกสบอล', 'ball.jpg', 40, 40, 3, 1),
+('I003', 'แชร์บอลบอล', 'chairball.jpg', 10, 10, 3, 1),
 ('I004', 'แบดมินตัน', 'bat.jpg', 20, 20, 0, 1),
 ('I005', 'ไม้เทนนิส', 'tennid.jpg', 20, 20, 0, 1),
 ('I006', 'ตระกร้า', 'takor.jpg', 30, 30, 0, 1),
-('I007', 'ปิงปองง', '1.jpg', 25, 25, 0, 1),
-('I008', 'กระบี่', '059620033.jpg', 100, 100, 0, 1),
+('I007', 'ปิงปองง', '1.jpg', 25, 25, 1, 1),
+('I008', 'กระบี่', '059620033.jpg', 100, 100, 1, 1),
 ('O001', 'ฟุตบอล', 'football.jpg', 35, 35, 0, 2),
 ('O002', 'ไม้กรีฑา', 'geeta.jpg', 15, 15, 0, 2),
 ('O003', 'เชือกชักกะเย่อ', 'chack.jpg', 5, 5, 0, 2),
@@ -215,11 +173,11 @@ CREATE TABLE `status_type` (
 --
 
 INSERT INTO `status_type` (`status_id`, `status_msg`) VALUES
-(1, '<span style=''color:#ff9626;''>  รอการตรวจสอบ  </span>'),
-(2, '<span style=''color:#33ea73;''>  รอรับของ  </span>'),
-(3, '<span style=''color:red;''>  ยืมของแล้ว  </span>'),
-(4, '<span style=''color:#ef9e1c;''> คืนไม่ครบ </span>'),
-(5, '<span style=''color:#1bf969;''>  คืนแล้ว  </span>');
+(1, '<span style=\'color:#ff9626;\'>  รอการตรวจสอบ  </span>'),
+(2, '<span style=\'color:#33ea73;\'>  รอรับของ  </span>'),
+(3, '<span style=\'color:red;\'>  ยืมของแล้ว  </span>'),
+(4, '<span style=\'color:#ef9e1c;\'> คืนไม่ครบ </span>'),
+(5, '<span style=\'color:#1bf969;\'>  คืนแล้ว  </span>');
 
 -- --------------------------------------------------------
 
@@ -270,7 +228,7 @@ INSERT INTO `subjects_table` (`subjects`, `teach_day`, `ref_item_id`, `room`, `r
 --
 
 CREATE TABLE `user_acount` (
-  `sudent_id` int(10) NOT NULL,
+  `sudent_id` varchar(10) NOT NULL,
   `fname` varchar(100) NOT NULL,
   `lname` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -282,16 +240,6 @@ CREATE TABLE `user_acount` (
   `telephone` varchar(11) NOT NULL,
   `user_type` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `user_acount`
---
-
-INSERT INTO `user_acount` (`sudent_id`, `fname`, `lname`, `email`, `class`, `sec`, `gender`, `username`, `password`, `telephone`, `user_type`) VALUES
-(1234567883, 'สามารถ', 'ใจดี', 'sa@gmail.com', 2, 3, 'M', 'sa', 'sa', '0965333810', 1),
-(1234567891, 'นาวิน', 'ภักดี', 'na@ge.com', 1, 1, 'M', 'www', 'www', '0897685431', 2),
-(1234567893, 'วรวุฒ', 'อินทร์ดี', 'wo@hotmail.com', 1, 1, 'M', 'wo', 'wo', '0832768990', 1),
-(2147483647, 'ดาราวดี', 'อินทร์ดี', 'dara@hotmail.com', 1, 1, 'F', 'admin', 'admin', '0955432178', 3);
 
 -- --------------------------------------------------------
 
@@ -373,12 +321,12 @@ ALTER TABLE `user_acount`
 -- AUTO_INCREMENT for table `borrow_detail`
 --
 ALTER TABLE `borrow_detail`
-  MODIFY `detail_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `detail_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `borrow_table`
 --
 ALTER TABLE `borrow_table`
-  MODIFY `borrow_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `borrow_id` int(6) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `master_name_table`
 --
@@ -388,12 +336,13 @@ ALTER TABLE `master_name_table`
 -- AUTO_INCREMENT for table `request_item_table`
 --
 ALTER TABLE `request_item_table`
-  MODIFY `request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `subjects_table`
 --
 ALTER TABLE `subjects_table`
-  MODIFY `subjects` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `subjects` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
