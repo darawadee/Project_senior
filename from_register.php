@@ -1,14 +1,18 @@
+<?php 	session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
 	<script type="text/javascript" src="lib/js/jquery-3.2.0.js"></script>
 </head>
+<form  action="action_register.php" method="POST">
 <body>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<form  action="http://localhost/Project_senior/action_register.php" method="POST">
+			
 			    <div class="form-group">
 			        <label for="name">ชื่อ</label>
 			        <input type="text" class="form-control" name="fname" 
@@ -21,8 +25,7 @@
 			    </div>
 			    <div class="form-group">
 			        <label for="id">รหัส</label>
-			        <input type="number" class="form-control" name="sudent_id" 
-			        placeholder="รหัสนักเรียน" title="ใส่แต่ตัวเขลเท่านั้น และ 10 หลัก">
+			        <input type="number" class="form-control" pattern="[0-9]{10}" name="sudent_id" placeholder="รหัสนักเรียน" title="ใส่แต่ตัวเขลเท่านั้น และ 10 หลัก">
 			    </div>
 			    <div class="form-group">
 			        <label for="class">ชั้นปี</label>
@@ -76,9 +79,10 @@
 			    
 			    <button type="submit" class="btn btn-success"> บันทึก </button>
 			     <button id="reset" class="btn btn-danger"> เริ่มใหม่ </button>
-			</form>
+	
 		</div>
 	</div>
+
 	<script type="text/javascript">
 		$(function(){
 
@@ -89,4 +93,7 @@
 		});
 	</script>
 </body>
+		</form>
 </html>
+
+
