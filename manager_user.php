@@ -51,7 +51,7 @@
 
 	   ?>
 	</table>
-	<a href="../user_equipment.php" class="btn btn-success">
+	<a href="../from_register.php" class="btn btn-success">
 		
 		 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
 		เพิ่มข้อมูลสมาชิก

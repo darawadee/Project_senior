@@ -8,7 +8,7 @@
 <body>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<form role="form" action="action_register.php" method="post">
+			<form  action="http://localhost/Project_senior/action_register.php" method="POST">
 			    <div class="form-group">
 			        <label for="name">ชื่อ</label>
 			        <input type="text" class="form-control" name="fname" 
@@ -21,8 +21,8 @@
 			    </div>
 			    <div class="form-group">
 			        <label for="id">รหัส</label>
-			        <input type="text" class="form-control" name="sudent_id" 
-			        placeholder="รหัสนักเรียน" pattern="[0-9]{10}" title="ใส่แต่ตัวเขลเท่านั้น และ 10 หลัก">
+			        <input type="number" class="form-control" name="sudent_id" 
+			        placeholder="รหัสนักเรียน" title="ใส่แต่ตัวเขลเท่านั้น และ 10 หลัก">
 			    </div>
 			    <div class="form-group">
 			        <label for="class">ชั้นปี</label>
@@ -81,11 +81,11 @@
 	</div>
 	<script type="text/javascript">
 		$(function(){
-			$('input').attr('required', '');
 
 			$("#reset").click(function(event) {
 				$("input").val('');
 			});
+			$('input').attr('required', '');
 		});
 	</script>
 </body>
