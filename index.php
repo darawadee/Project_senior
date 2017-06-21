@@ -227,7 +227,15 @@
 
  		$(".item-list").click(function(event) {
  			var item_type = $(this).attr('item-type');
- 			get_item(item_type);
+ 			//get_item(item_type);
+ 			$.post('show_item.php', 
+				 function() {
+				/*optional stuff to do after success */
+				}
+			).done(function(data){
+				console.log(data);
+				$("#content").html(data);
+			});
  			
  		});
 
@@ -292,14 +300,13 @@ function mount_info_tomodel(){
 
 
 function get_item(item_type){
+
 	$.post('show_item.php', 
-		{
-			item_type: item_type
-		},
 		 function() {
 		/*optional stuff to do after success */
 		}
 	).done(function(data){
+		console.log(data);
 		$("#content").html(data);
 	});
 }
@@ -337,7 +344,7 @@ function get_form_request(){
 
 	});
 }
- 	
+ 
 
  	$(function(){
  		get_table_subject();

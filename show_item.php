@@ -15,72 +15,25 @@
 	}
 </style>
 
-<?php 
-	require 'config_DB/DB_connect.php';
-	$config = parse_ini_file("config_DB/sport_type.ini");
-	if(isset($_POST['item_type'])){
-		if($_POST['item_type']!="0"){
-			$sql ="SELECT * FROM `sport_inventory` WHERE `item_type` = '{$_POST['item_type']}' ";
-
-			$disable = "";
-
-
-
-			if($res = mysqli_query($connect, $sql)){
-				echo "<h2>{$config[$_POST['item_type']]}</h2><hr>";
-				while ($row = mysqli_fetch_assoc($res)) {
-					if($row['item_total'] * 1 <= 0){
-					    $disabled = "disabled";
-					}else{
-					     $disabled = "";
-					}
-
-					echo "<div class='col-md-3 '>";
-					echo "<div class='item' align='center'>";
-					echo "<img id='{$row['item_id']}'  src='img_item/{$row['item_img']}' style='height:150px;width: 150px;' > </img>";
-					
-					echo "<p id='Name-{$row['item_id']}'>{$row['item_name']} (<b>{$row['item_total']}</b>)</p>";
-					echo "<button class='btn btn-info borrow' {$disabled} item-id='{$row['item_id']}'>ยืมอุปกรณ์</button>";
-					echo "</div>";
-
-					echo "</div>";
-				}
-			}
-		}else{
-			$item_list =  array(1,2,3);
-			foreach ($item_list as $key => $value) {
-				$sql ="SELECT * FROM `sport_inventory` WHERE `item_type` = '{$value}' ";
-				if($res = mysqli_query($connect, $sql)){
-				echo "<h2>{$config[$value]}</h2><hr>";
-				echo "<div class='row'>";
-				while ($row = mysqli_fetch_assoc($res)) {
-					if($row['item_total'] * 1 <= 0){
-					    $disabled = "disabled";
-					}else{
-					     $disabled = "";
-					}
-					echo "<div class='col-md-4 '>";
-					echo "<div class='item' align='center'>";
-					echo "<img id='{$row['item_id']}'  src='img_item/{$row['item_img']}' style='height:150px;width: 150px;' > </img>";
-					
-					echo "<p id='Name-{$row['item_id']}'>{$row['item_name']} จำนวน (<b>{$row['item_total']}</b>) ชิ้น</p>";
-					echo "<button class='btn btn-info borrow' {$disabled} item-id='{$row['item_id']}'>ยืมอุปกรณ์</button>";
-					echo "</div>";
-
-					echo "</div>";
-				}
-				echo "</div>";
-			}
-			}
-
-		}
+<div class="row">
+	<div class="form-inline">
+	 
+	  <div class="form-group pull-right">
+	  
+	    <input type="text" class="form-control" id="find-item" >
+	      <a class="btn btn-info" id="find">ค้นหา</a>
+	  </div>
+	
+	</div>
+</div>		
 		
-	}
+	
+	
+<div id="item-content">
 
 
 
-?>
-
+</div>
 <div class="modal fade" id="modal-borrow" role="dialog">
     <div class="modal-dialog">
     
@@ -118,35 +71,34 @@
     </div>
 </div>
 <script type="text/javascript">
-	$('.borrow').click(function(event) {
-		var item_id = $(this).attr('item-id');
-		$("#item-hide-id").val(item_id);
-		$("#num-item").val('');
-		var url_img =  $("#"+item_id).attr('src');
-		var name_item = $('#Name-'+item_id).text();
-		$("#modal-name").text(name_item);
-		var total = $('#Name-'+item_id+' b').text(); 
-		$("#alert").text(total);
-		$("#num-item").attr('max', total);
-		$("#modal-img").attr('src', url_img);
-		$("#modal-borrow").modal('toggle');
+	
+		get_item();
+	
 
-	});
+	
 
-	$("form#modal-item").submit(function(event) {
-		let item_id = $("#item-hide-id").val();
-		let amount = $("#num-item").val();
-		var note = $("#note").val();
-		$.post('service/service_session_cart.php', {item_id: item_id,amount:amount,method:'set',note:note}, function() {
-			
-		}).done(function(data){
-			if(data == 'true'){
-				get_count_item();
-				$("#modal-borrow").modal('toggle');
+
+
+	$(function(){
+		$("#find").click(function() {
+			var word = $("#find-item").val();
+
+			if(word!=""){
+				 get_item(word);
+				
 			}else{
-				alert(data);
+				alert("ไม่พบข้อมูล");
 			}
 		});
-		//alert($("#item-hide-id").val()+" num "+$("#num-item").val());
 	});
+
+	function get_item(word = 'null'){
+		
+		$.post('service/show_item_br_key.php', {word: word}, function() {
+					/*optional stuff to do after success */
+		}).done(function(data){
+			$("#item-content").html(data);
+			//alert(data);
+		});
+	}
 </script>
