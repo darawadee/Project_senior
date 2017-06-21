@@ -10,12 +10,16 @@
 			//$sql = $sql."VALUES ('1212', 'dsfsfdsf', 'sdfsdfsdfsd', '11', '11', '1');";
 			if(mysqli_query($connect, $sql)){
 				echo "เพิ่มอุปกรณ์เรียบร้อยแล้ว";
-				header('Location: index.php');
+				header('Location: admin/index.php');
 			}else{
 				echo "เพิ่มอุปกรณ์ไม่สำเร็จ".mysqli_error($connect);
 			}
+		}else{
+			echo "img_item/".$_FILES["p_img"]["name"];
 		}
 
+	}else{
+		echo "else";
 	}
 	
 

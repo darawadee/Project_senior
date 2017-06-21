@@ -21,7 +21,7 @@ $row=  mysqli_fetch_assoc($res);
     <div class="col-md-6"> <br />
       <h4 align="center"> ฟอร์มแก้ไขอุปกรณ์กีฬา </h4>
       <hr />
-      <form action="action_edit_item.php" method="POST" enctype="multipart/form-data"  name="addprd" class="form-horizontal" id="addprd">
+      <form action="../action_edit_item.php" method="POST" enctype="multipart/form-data"  name="addprd" class="form-horizontal" id="addprd">
         <div class="form-group">
           <div class="col-sm-12">
             <p> ชื่ออุปกรณ์</p>

@@ -12,7 +12,7 @@
 				echo "<br>".$sql;
 				if(mysqli_query($connect, $sql)){
 
-					header( "location: index.php" );
+					header( "location: admin/index.php" );
 				}
 			}
 			
@@ -21,7 +21,7 @@
 			$sql = " UPDATE `sport_inventory` SET `item_id`='{$_POST['p_code']}',`item_name`='{$_POST['p_name']}',`item_all`='{$_POST['p_unit']}',`item_type`='{$_POST['p_code_type']}' WHERE  `item_id` = '{$_POST['p_code']}' ";
 			echo $sql;
 			if(mysqli_query($connect, $sql)){
-				header( "location: index.php" );
+				header( "location: admin/index.php" );
 	
 
 			}

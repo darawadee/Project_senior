@@ -1,6 +1,8 @@
 <?php
 session_start(); 
 include '../config_DB/DB_connect.php';
+// var_dump($_SESSION);
+// die();
 $user_id = $_SESSION["data_user"]["sudent_id"];
 $_SESSION["item_cart"];
 $date = date("d-m-Y H:i:s");
@@ -9,8 +11,11 @@ if(count($_SESSION["item_cart"]) > 0){
 	
 
 		$create_id_br = "INSERT INTO `borrow_table` ( `ref_user_id`, `borrow_date`,`br_type`) VALUES ('{$user_id}', '{$date}','{$_SESSION['note']}');";
+		//echo $create_id_br;
+		//die;
 		if(mysqli_query($connect, $create_id_br)){
 			$get_br_id = "SELECT `borrow_id` FROM `borrow_table` WHERE `ref_user_id` = '{$user_id}' ORDER BY `borrow_id` DESC LIMIT 1";
+			
 			if($res_get_br_id = mysqli_query($connect, $get_br_id) ){
 				
 				$data_get_br_id = mysqli_fetch_assoc($res_get_br_id);
@@ -48,7 +53,7 @@ if(count($_SESSION["item_cart"]) > 0){
 			}
 		}else{
 			echo "ระบบขัดข้องกรุณาลองใหม่";
-			die();
+			//die();
 		}
 		//echo $create_id_br."\n";
 		

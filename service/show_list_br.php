@@ -43,7 +43,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 	?>
 	<!-- // for admin -->
 </table>
-<?php }elseif($_SESSION["data_user"]["user_type"] == 3){ ?>
+<?php }elseif($_SESSION["data_user"]["user_type"] == "3"){ ?>
 	<table class="table table-hover" id="br_table">
 		<tr >
 			<th>เลขที่การยืม</th>
@@ -58,6 +58,7 @@ while ($row_type_msg = mysqli_fetch_assoc($res_select_type_msg )) {
 		</tr>
 		<?php 
 		$sql_get_br = "SELECT * FROM `user_acount` INNER JOIN borrow_table on(user_acount.sudent_id=borrow_table.ref_user_id) INNER JOIN status_type ON (borrow_table.br_status=status_type.status_id) WHERE borrow_table.br_status != 5 ORDER BY `borrow_table`.`borrow_id` DESC";
+		
 		$res_get_br = mysqli_query($connect, $sql_get_br);
 		while ($row_br = mysqli_fetch_assoc($res_get_br)) {
 			# code...
