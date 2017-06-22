@@ -21,7 +21,7 @@ $m = array_search($_POST['month'],$array_mount);
 
 
 if($_POST['type'] == 'ยืม'){
-	$sql = "SELECT borrow_table.borrow_id,user_acount.sudent_id,CONCAT(user_acount.fname,' ',user_acount.lname,' ',user_acount.class,'/',user_acount.sec) AS name , borrow_table.borrow_date FROM `borrow_table` INNER JOIN user_acount ON(borrow_table.ref_user_id=user_acount.sudent_id) WHERE `br_status` >= 3 and `borrow_date`LIKE '%{$m}-{$year}%'";
+	$sql = "SELECT borrow_table.borrow_id,user_acount.sudent_id,CONCAT(user_acount.fname,' ',user_acount.lname,' ','ชั้น (',user_acount.class,'/',user_acount.sec,')') AS name , borrow_table.borrow_date FROM `borrow_table` INNER JOIN user_acount ON(borrow_table.ref_user_id=user_acount.sudent_id) WHERE `br_status` >= 3 and `borrow_date`LIKE '%{$m}-{$year}%'";
 ?>
 <table class='table' id='table_br_new'>
 	<thead>
