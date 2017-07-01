@@ -1,11 +1,12 @@
 <?php
 session_start(); 
 include '../config_DB/DB_connect.php';
+include '../lib/php/helper.php';
 // var_dump($_SESSION);
 // die();
 $user_id = $_SESSION["data_user"]["sudent_id"];
 $_SESSION["item_cart"];
-$date = date("d-m-Y H:i:s");
+$date = data_thai(date("d-m-Y H:i:s"));
 $status = true;
 if(count($_SESSION["item_cart"]) > 0){
 	

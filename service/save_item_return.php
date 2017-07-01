@@ -2,9 +2,10 @@
 // echo "<pre>";
 // var_dump($_POST);
 include '../config_DB/DB_connect.php';
+include '../lib/php/helper.php';
 $item_not_null = array();
 $item_return_bad = array();
-$date = date("d-m-Y H:i:s");
+$date = data_thai(date("d-m-Y H:i:s"));
 $return = array();
 // check data not null add array
 

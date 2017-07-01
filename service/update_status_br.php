@@ -1,9 +1,10 @@
 <?php 
 session_start();
 include '../config_DB/DB_connect.php';
+include '../lib/php/helper.php';
 //var_dump($_POST);
 $status = true;
-$date = date("d-m-Y H:i:s");
+$date = data_thai(date("d-m-Y H:i:s"));
 if(check_pass($_POST['password'])){
 
 	$select_item_by_br = "SELECT * FROM `borrow_detail` WHERE `ref_borrow_id` = '{$_POST['br_id']}';";
